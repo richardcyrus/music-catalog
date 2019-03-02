@@ -1,0 +1,9 @@
+!.eslintrc.js
+build
+client
+docs/**/*.js
+fixtures/
+my-app*
+node_modules/
+packages/react-scripts/fixtures
+packages/react-scripts/template
