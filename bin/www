@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * music-catalog
+ * your-score
  *
  * (c) 2019 Richard Cyrus, Rojin Pourkhomami, Alexis Rogers, Santiago Sepulveda
  */
@@ -15,7 +15,7 @@
  */
 require('dotenv').config();
 const app = require('../app');
-const debug = require('debug')('music-catalog:server');
+const debug = require('debug')('your-score:server');
 const http = require('http');
 const models = require('../models');
 
