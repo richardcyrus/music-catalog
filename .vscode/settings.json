@@ -65,4 +65,5 @@
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "es5",
   "scm.diffDecorations": "gutter",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
 }

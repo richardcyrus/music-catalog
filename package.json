@@ -37,7 +37,7 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && yarn run start:prod || yarn run start:dev",
     "start:prod": "node ./bin/www",
-    "start:dev": "concurrently \"DEBUG=your-score:* nodemon ./bin/www\" \"yarn run client\"",
+    "start:dev": "concurrently \"cross-env DEBUG=your-score:* nodemon ./bin/www\" \"yarn run client\"",
     "client": "cd client && yarn start",
     "install": "cd client && yarn install",
     "build": "cd client && yarn build",
@@ -55,8 +55,8 @@
     }
   },
   "engines": {
-    "node": "11.10.1",
-    "yarn": "1.13.0",
-    "npm": "6.8.0"
+    "node": ">=8.9.0",
+    "yarn": ">=1.9.2",
+    "npm": ">=6.0.0"
   }
 }
