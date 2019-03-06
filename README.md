@@ -10,4 +10,5 @@
     `<host>`: the the hostname of IP address of the MySQL database server.
     `<database>`: is the name of the database.
 5. From the shell, in the project folder, enter `yarn` to install the project dependencies.
-6. Once the dependencies have been installed, type `yarn start` to launch the application.
+6. At the shell prompt enter `./node_modules/.bin/sequelize db:create`
+7. Once the dependencies have been installed, type `yarn start` to launch the application.
