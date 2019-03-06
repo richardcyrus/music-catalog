@@ -1,5 +1,5 @@
 {
-  "name": "music-catalog",
+  "name": "your-score",
   "version": "1.0.0",
   "repository": "https://github.com/richardcyrus/music-catalog.git",
   "author": "Richard Cyrus <hello@rcyrus.com> (https://www.richardcyrus.com/)",
@@ -36,7 +36,7 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && yarn run start:prod || yarn run start:dev",
     "start:prod": "node ./bin/www",
-    "start:dev": "concurrently \"DEBUG=music-catalog:* nodemon ./bin/www\" \"yarn run client\"",
+    "start:dev": "concurrently \"DEBUG=your-score:* nodemon ./bin/www\" \"yarn run client\"",
     "client": "cd client && yarn start",
     "install": "cd client && yarn install",
     "build": "cd client && yarn build",

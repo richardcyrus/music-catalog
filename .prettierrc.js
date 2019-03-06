@@ -1,5 +1,5 @@
 /**
- * music-catalog
+ * your-score
  *
  * (c) 2019 Richard Cyrus, Rojin Pourkhomami, Alexis Rogers, Santiago Sepulveda
  */
