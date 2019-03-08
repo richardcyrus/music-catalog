@@ -1,0 +1,40 @@
+img {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+}
+
+.w3-bar-item {
+  display: flex;
+  margin: 0 auto;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+    margin-top:15%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  
+  body {font-family: "Lato", sans-serif}
+  .mySlides {display: none}
+  
+  .footer {
+    height: 50px;
+    margin-top: -50px;
+     width: 100%;
+     background-color: black;
+     color: white;
+     text-align: center;
+  }
