@@ -11,21 +11,23 @@ class App extends Component {
     this.loadCatalog();
   }
 
+  // Responsible for retrieving all music from sheet_music table
   loadCatalog = () => {
     API.getCatalog()
       .then((res) => this.setState({ musicCatalog: res.data }))
       .catch((err) => console.log(err));
   };
 
-  propFunction(component) {
-    console.log(`${component} has been clicked!`);
-  }
+  // Responsible for filtering based on user input
+  propFunction = (component) => {
+    console.log(`${component}`);
+  };
 
   render() {
     return (
       <CurrentCatalog
         musicCatalog={this.state.musicCatalog}
-        passingFunction={this.propFunction}
+        // propFunction={this.propFunction}
       />
     );
   }

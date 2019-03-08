@@ -11,4 +11,9 @@ export default {
   getCatalog: function() {
     return ajax.get('/api/v1.0/music');
   },
+
+  // Filters catalog based on user input
+  getFilteredCatalog: function() {
+    return ajax.get('/api/v1.0/filteredMusic');
+  },
 };
