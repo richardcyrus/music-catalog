@@ -2,6 +2,7 @@ img {
   position: relative;
   display: flex;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .w3-bar-item {
@@ -31,8 +32,9 @@ table {
   .mySlides {display: none}
   
   .footer {
-    height: 50px;
-    margin-top: -50px;
+    position: fixed;
+     left: 0;
+     bottom: 0;
      width: 100%;
      background-color: black;
      color: white;
