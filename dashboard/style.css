@@ -1,3 +1,13 @@
+img {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+}
+
+.w3-bar-item {
+  display: flex;
+  margin: 0 auto;
+}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -5,13 +15,6 @@ table {
     margin-left:15%; 
     margin-right:15%;
     margin-top:15%;
-  }
-
-  .w3-bar-item{
-    float: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
   }
   
   td, th {
