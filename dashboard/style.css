@@ -1,3 +1,13 @@
+img {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+}
+
+.w3-bar-item {
+  display: flex;
+  margin: 0 auto;
+}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
