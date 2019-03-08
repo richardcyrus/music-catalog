@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import API from './utils/API';
+import CurrentCatalog from './components/CurrentCatalog';
 
 class App extends Component {
+  state = {
+    musicCatalog: [],
+  };
+
+  componentDidMount() {
+    this.loadCatalog();
+  }
+
+  loadCatalog = () => {
+    API.getCatalog()
+      .then((res) => this.setState({ musicCatalog: res.data }))
+      .catch((err) => console.log(err));
+  };
+
+  propFunction(component) {
+    console.log(`${component} has been clicked!`);
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <CurrentCatalog
+        musicCatalog={this.state.musicCatalog}
+        passingFunction={this.propFunction}
+      />
     );
   }
 }
