@@ -75,6 +75,76 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'sheet_music',
       underscored: true,
       freezeTableName: true,
+      scopes: {
+        library: {
+          include: [
+            {
+              model: sequelize.models.Accompaniment,
+              as: 'accompaniments',
+              attributes: ['name'],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: sequelize.models.Arranger,
+              as: 'arrangers',
+              attributes: ['name'],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: sequelize.models.Composer,
+              as: 'composers',
+              attributes: ['name'],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: sequelize.models.Editor,
+              as: 'editors',
+              attributes: ['name'],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: sequelize.models.Genre,
+              as: 'genres',
+              attributes: ['name'],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: sequelize.models.Language,
+              as: 'languages',
+              attributes: ['language'],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: sequelize.models.Lyricist,
+              as: 'lyricists',
+              attributes: ['name'],
+              through: {
+                attributes: [],
+              },
+            },
+            {
+              model: sequelize.models.Occasion,
+              as: 'occasions',
+              attributes: ['name'],
+              through: {
+                attributes: [],
+              },
+            },
+          ],
+        },
+      },
     }
   );
 
