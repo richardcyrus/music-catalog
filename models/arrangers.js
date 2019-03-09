@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: true,
-        field: 'arranger_name',
+        unique: true,
+        field: 'name',
       },
     },
     {

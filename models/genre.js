@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING(255),
         allowNull: true,
-        field: 'genre_name',
+        unique: true,
+        field: 'name',
       },
     },
     {
