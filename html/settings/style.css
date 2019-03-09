@@ -28,8 +28,12 @@ table {
     background-color: #dddddd;
   }
   
-  body {font-family: "Lato", sans-serif}
-  .mySlides {display: none}
+  body {
+    font-family: "Lato", sans-serif;
+    background-image: url("pic.jpg");
+    background-repeat: no-repeat;
+  background-size: 100% 100vh;
+  }
   
   .footer {
      position: fixed;

@@ -15,7 +15,7 @@ table {
     width:65%; 
     margin-left:30%; 
     margin-right:15%;
-    margin-top:-30%;
+    margin-top:-33%;
   }
   
   td, th {
@@ -30,6 +30,9 @@ table {
   
   body {
     font-family: "Lato", sans-serif;
+    background-image: url("pic.jpg");
+    background-repeat: no-repeat;
+  background-size: 100% 100vh;
   }
   
   .footer {
@@ -81,4 +84,4 @@ table {
   
   #myUL li a:hover:not(.header) {
     background-color: #eee;
-  }
+}

@@ -28,8 +28,9 @@ table {
     background-color: #dddddd;
   }
   
-  body {font-family: "Lato", sans-serif}
-  .mySlides {display: none}
+  body {
+    font-family: "Lato", sans-serif;
+  }
   
   .footer {
     height: 50px;

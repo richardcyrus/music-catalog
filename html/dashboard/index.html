@@ -21,16 +21,35 @@
                     <a href="../library/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LIBRARY</a>
                     <a href="../events/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
                     <a href="../settings/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">SETTINGS</a>
-            
                     <a href="../contact/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
         </div>
     </div>
 
-  
+    <h2>Login Form</h2>
 
-    <div class="footer">
+<form action="/action_page.php">
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+</form>
+
+    <!-- <div class="footer">
         <p>YourScore 2019</p>
-    </div>
+    </div> -->
 
     <script>
 
