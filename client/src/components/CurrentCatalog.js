@@ -13,7 +13,7 @@ function CurrentCatalog(props) {
           placeholder="Search"
           className=" mr-sm-2"
           onClick={() => {
-            props.propFunction(comp);
+            props.filterCatalog(`this`);
           }}
         />
         <Form.Label className="mr-2">Value:</Form.Label>

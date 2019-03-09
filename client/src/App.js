@@ -3,9 +3,14 @@ import API from './utils/API';
 import CurrentCatalog from './components/CurrentCatalog';
 
 class App extends Component {
-  state = {
-    musicCatalog: [],
-  };
+  constructor(props) {
+    super(props);
+    // this.filterCatalog = this.filterCatalog.bind(this);
+    this.state = {
+      musicCatalog: [],
+      search: '',
+    };
+  }
 
   componentDidMount() {
     this.loadCatalog();
@@ -19,15 +24,17 @@ class App extends Component {
   };
 
   // Responsible for filtering based on user input
-  propFunction = (component) => {
-    console.log(`${component}`);
+  filterCatalog = (element) => {
+    API.getFilteredCatalog()
+      .then((res) => this.setState({ musicCatalog: res.data }))
+      .catch((err) => console.log(err));
   };
 
   render() {
     return (
       <CurrentCatalog
         musicCatalog={this.state.musicCatalog}
-        // propFunction={this.propFunction}
+        filterCatalog={this.filterCatalog}
       />
     );
   }
