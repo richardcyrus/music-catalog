@@ -178,10 +178,11 @@ hr {
     }
   }
   
-<<<<<<< HEAD
+
   body {
     font-family: "Lato", sans-serif;
-=======
+  }
+  
   @keyframes type2 {
     0% {
       width: 0;
@@ -196,7 +197,7 @@ hr {
       opacity: 1;
       border: none;
     }
->>>>>>> 7791e898412555893a6173c680ef2a0188c9fb84
+
   }
   
   @-webkit-keyframes type2 {
