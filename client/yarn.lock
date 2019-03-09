@@ -8382,6 +8382,11 @@ react-app-polyfill@^0.2.1:
     raf "3.4.1"
     whatwg-fetch "3.0.0"
 
+react-data-grid@6.0.2-0:
+  version "6.0.2-0"
+  resolved "https://registry.yarnpkg.com/react-data-grid/-/react-data-grid-6.0.2-0.tgz#b71691a911c99d53445d20bd8a7b281c0d4bf6da"
+  integrity sha512-OiE/EevjV70J60OGj2Pcy8P3uRQGvyD0Ata2NbXjE2rKOGUuJ7hau8WcvIFhAMP005LEV+pfqzZpkIYjD1u3OQ==
+
 react-dev-utils@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-7.0.3.tgz#f1316cfffd792fd41b0c28ad5db86c1d74484d6f"

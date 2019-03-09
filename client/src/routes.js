@@ -9,9 +9,11 @@ function Routes() {
     <BrowserRouter>
       <React.Fragment>
         <PageHeader />
-        <Switch>
-          <Route exact path="/library" component={LibraryPage} />
-        </Switch>
+        <main role="main" className="w3-container w3-main">
+          <Switch>
+            <Route exact path="/library" component={LibraryPage} />
+          </Switch>
+        </main>
         <PageFooter />
       </React.Fragment>
     </BrowserRouter>

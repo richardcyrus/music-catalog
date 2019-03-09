@@ -10,6 +10,12 @@ img {
   margin: 0 auto;
 }
 
+main {
+  top: 187px;
+  position: relative;
+  padding-top: 16px;
+}
+
 .w3-bar-item {
   display: flex;
   margin: 0 auto;
