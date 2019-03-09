@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/YourScore-logo-white-02.png';
 
@@ -14,41 +15,26 @@ function PageHeader() {
         >
           <FontAwesomeIcon icon="bars" />
         </a>
-        <a
-          href="../dashboard/index.html"
-          className="w3-bar-item w3-button w3-padding-large"
-        >
+        <a href="/dashboard" className="w3-bar-item w3-button w3-padding-large">
           HOME
         </a>
-        <a
-          href="../library/index.html"
+        <NavLink
+          to="/library"
           className="w3-bar-item w3-button w3-padding-large w3-hide-small"
         >
           LIBRARY
-        </a>
+        </NavLink>
         <a
-          href="../events/index.html"
+          href="/events"
           className="w3-bar-item w3-button w3-padding-large w3-hide-small"
         >
           EVENTS
         </a>
         <a
-          href="../settings/index.html"
+          href="/settings"
           className="w3-bar-item w3-button w3-padding-large w3-hide-small"
         >
           SETTINGS
-        </a>
-        <a
-          href="../contact/index.html"
-          className="w3-bar-item w3-button w3-padding-large w3-hide-small"
-        >
-          CONTACT
-        </a>
-        <a
-          href="#search"
-          className="w3-padding-large w3-hover-red w3-hide-small w3-right"
-        >
-          <FontAwesomeIcon icon="search" />
         </a>
       </div>
     </div>

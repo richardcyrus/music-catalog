@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import PageHeader from './components/PageHeader';
-import PageFooter from './components/PageFooter';
+import Routes from './routes';
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        <PageHeader />
-        <PageFooter />
-      </div>
-    );
+    return <Routes />;
   }
 }
 
