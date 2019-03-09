@@ -3,11 +3,10 @@
  *
  * (c) 2019 Richard Cyrus, Rojin Pourkhomami, Alexis Rogers, Santiago Sepulveda
  */
-
 const express = require('express');
 const router = express.Router();
-const libraryRoutes = require('./library');
+const libraryController = require('../../controllers/musicLibrary');
 
-router.use('/library', libraryRoutes);
+router.route('/').get(libraryController.findAll);
 
 module.exports = router;
