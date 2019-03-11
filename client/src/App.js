@@ -5,10 +5,11 @@ import CurrentCatalog from './components/CurrentCatalog';
 class App extends Component {
   constructor(props) {
     super(props);
-    // this.filterCatalog = this.filterCatalog.bind(this);
     this.state = {
       musicCatalog: [],
-      search: '',
+      // Used to filter sheet music table
+      attribute: '',
+      value: '',
     };
   }
 
@@ -23,9 +24,22 @@ class App extends Component {
       .catch((err) => console.log(err));
   };
 
-  // Responsible for filtering based on user input
-  filterCatalog = (element) => {
-    API.getFilteredCatalog()
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
+    // console.log(`${name} : ${value}`);
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    let filteringConditions = {
+      tableColumn: this.state.attribute,
+      tableValue: this.state.value,
+    };
+
+    API.getFilteredCatalog(filteringConditions)
       .then((res) => this.setState({ musicCatalog: res.data }))
       .catch((err) => console.log(err));
   };
@@ -34,7 +48,8 @@ class App extends Component {
     return (
       <CurrentCatalog
         musicCatalog={this.state.musicCatalog}
-        filterCatalog={this.filterCatalog}
+        handleInputChange={this.handleInputChange}
+        handleSubmit={this.handleSubmit}
       />
     );
   }

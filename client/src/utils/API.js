@@ -13,7 +13,9 @@ export default {
   },
 
   // Filters catalog based on user input
-  getFilteredCatalog: function() {
-    return ajax.get('/api/v1.0/filteredMusic');
+  getFilteredCatalog: function(filterCondition) {
+    return ajax.get('/api/v1.0/filteredMusic', {
+      params: { q: filterCondition },
+    });
   },
 };

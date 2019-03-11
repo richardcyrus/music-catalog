@@ -1,23 +1,40 @@
 import React from 'react';
-import { Container, Table, Form, FormControl } from 'react-bootstrap';
-// import { Container, Col, Row } from 'react-bootstrap'
+import { Container, Table, Form, FormControl, Button } from 'react-bootstrap';
+
+// const handleSubmit = (event) => {
+//   event.preventDefault();
+//   console.log(`${event.target}`);
+// };
 
 function CurrentCatalog(props) {
-  console.log(props);
   return (
     <Container className="py-2">
-      <Form inline className="mb-2 justify-content-center">
+      <Form
+        inline
+        className="mb-2 justify-content-center"
+        onSubmit={(event) => {
+          props.handleSubmit(event);
+        }}
+      >
         <Form.Label className="mr-2">Filter by:</Form.Label>
         <FormControl
+          name="attribute"
           type="text"
-          placeholder="Search"
+          placeholder="Attribute"
           className=" mr-sm-2"
-          onClick={() => {
-            props.filterCatalog(`this`);
-          }}
+          onChange={props.handleInputChange}
         />
         <Form.Label className="mr-2">Value:</Form.Label>
-        <FormControl type="text" placeholder="Value" className=" mr-sm-2" />
+        <FormControl
+          name="value"
+          type="text"
+          placeholder="Value"
+          className=" mr-sm-2"
+          onChange={props.handleInputChange}
+        />
+        <Button variant="primary" type="submit">
+          Filter
+        </Button>
       </Form>
       <Table striped bordered hover>
         <thead>
