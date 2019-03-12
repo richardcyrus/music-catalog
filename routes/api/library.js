@@ -8,5 +8,7 @@ const router = express.Router();
 const libraryController = require('../../controllers/musicLibrary');
 
 router.route('/').get(libraryController.findAll);
+// Extra filtered music_sheet
+router.route('/filteredMusic').get(libraryController.findFiltered);
 
 module.exports = router;

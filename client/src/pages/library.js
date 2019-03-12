@@ -2,10 +2,14 @@ import React from 'react';
 import Api from '../utils/api';
 import logo from '../assets/YourScore-logo-white-02.png';
 import ReactDataGrid from 'react-data-grid';
+import SearchBar from '../components/SearchBar';
 
 class LibraryPage extends React.Component {
   state = {
     library: [],
+    // Used to filter sheet music table
+    attribute: '',
+    value: '',
   };
 
   loadMusic() {
@@ -33,6 +37,42 @@ class LibraryPage extends React.Component {
   componentDidMount() {
     this.loadMusic();
   }
+
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    let filteringConditions = {
+      tableColumn: this.state.attribute,
+      tableValue: this.state.value,
+    };
+
+    Api.search(filteringConditions)
+      .then((res) => {
+        const library = res.data.map((item) => {
+          return {
+            ...item,
+            occasions: item.occasions.map((o) => o.name).join(', '),
+            composers: item.composers.map((o) => o.name).join(', '),
+            arrangers: item.arrangers.map((o) => o.name).join(', '),
+            editors: item.editors.map((o) => o.name).join(', '),
+            genres: item.genres.map((o) => o.name).join(', '),
+            languages: item.languages.map((o) => o.language).join(', '),
+            lyricists: item.lyricists.map((o) => o.name).join(', '),
+            accompaniments: item.accompaniments.map((o) => o.name).join(', '),
+          };
+        });
+
+        this.setState({ library });
+      })
+      .catch((err) => console.log(err));
+    // .then((res) => this.setState({ musicCatalog: res.data }))
+  };
 
   render() {
     const rows = this.state.library;
@@ -71,6 +111,10 @@ class LibraryPage extends React.Component {
 
     return (
       <div>
+        <SearchBar
+          handleInputChange={this.handleInputChange}
+          handleSubmit={this.handleSubmit}
+        />
         <ReactDataGrid
           columns={columns}
           rowGetter={(i) => rows[i]}
