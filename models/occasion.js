@@ -18,7 +18,8 @@ module.exports = function(sequelize, DataTypes) {
       name: {
         type: DataTypes.STRING(255),
         allowNull: true,
-        field: 'occasion_name',
+        unique: true,
+        field: 'name',
       },
     },
     {

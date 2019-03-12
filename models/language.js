@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       language: {
         type: DataTypes.STRING(255),
         allowNull: true,
-        field: 'language_name',
+        unique: true,
+        field: 'language',
       },
     },
     {
