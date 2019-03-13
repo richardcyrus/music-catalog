@@ -5,6 +5,7 @@ const ajax = axios.create({
     'Content-type': 'application/json',
   },
   baseURL: '/api/v1.0/',
+  responseType: 'json',
 });
 
 export default {
