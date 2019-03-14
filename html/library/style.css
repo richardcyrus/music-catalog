@@ -10,16 +10,27 @@ img {
   margin: 0 auto;
 }
 table {
-  border-radius: 5px;
   width: 50%;
-  margin: 250px auto;
+  margin: 270px auto;
   float: none;
+  text-align: center;
+  background-color: white;
+}
+
+th {
+  background-color: white;
+  font-size: 12px;
 }
   
   td, th {
-    border: 1px solid rgb(88, 31, 192);
-    text-align: left;
+    border: 1px solid #A2B9B2 !important;
+    text-align: center;
     padding: 8px;
+    color: black !important;
+  }
+
+  th {
+  background-color: white !important;
   }
   
   tr:nth-child(even) {
