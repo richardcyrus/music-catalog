@@ -1,14 +1,20 @@
-import React, { Component } from 'react';
-import Routes from './routes';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
+import Routes from './routes';
 
 library.add(faBars, faSearch);
 
-class App extends Component {
-  render() {
-    return <Routes />;
-  }
-}
+const App = ({ store }) => (
+  <Provider store={store}>
+    <Routes />
+  </Provider>
+);
+
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+};
 
 export default App;

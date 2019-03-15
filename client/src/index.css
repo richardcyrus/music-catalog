@@ -1,19 +1,27 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Lato|Quicksand');
 
 body {
   font-family: 'Lato', sans-serif;
 }
 
 img {
-  position: relative;
   display: flex;
   margin: 0 auto;
+  position: relative;
 }
 
-main {
-  top: 187px;
-  position: relative;
-  padding-top: 16px;
+/*main {*/
+/*top: 187px;*/
+/*position: relative;*/
+/*padding-top: 16px;*/
+/*}*/
+
+.landing-page {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
 }
 
 .w3-bar-item {
@@ -22,11 +30,26 @@ main {
 }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
   background-color: black;
+  bottom: 0;
   color: white;
+  left: 0;
+  position: fixed;
   text-align: center;
+  width: 100%;
+}
+
+.hero-image > .logo {
+  margin: 0 auto;
+  width: 32.375rem;
+}
+
+.hero-text {
+  text-align: center;
+}
+
+.hero-text > h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.5625rem;
+  font-weight: 200;
 }
