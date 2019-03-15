@@ -52,6 +52,45 @@ module.exports = {
       .then((records) => res.json(records))
       .catch((error) => res.status(422).json(error));
   },
+
+  // ********************************************************
+  // Still in Development*************************************
+  // Search by composer
+  findByComposer: function(req, res) {
+    // db.SheetMusic.scope('library')
+    db.SheetMusic.findAll({
+      attributes: [
+        'id',
+        'title',
+        'description',
+        'voices',
+        'duration',
+        'difficulty',
+        'style',
+        'publisher',
+        'quantityOnHand',
+        'purchasePrice',
+      ],
+      include: [
+        {
+          model: db.Composer,
+          as: 'composers',
+          attributes: ['name'],
+          through: {
+            attributes: [],
+          },
+          where: {
+            name: 'Randi Driscoll',
+          },
+        },
+      ],
+    })
+      .then((records) => res.json(records))
+      .catch((error) => res.status(422).json(error));
+  },
+  // Still in Development*************************************
+  // ********************************************************
+
   findById: function(req, res) {
     res.json({
       message: 'libraryController::findById() not implemented',

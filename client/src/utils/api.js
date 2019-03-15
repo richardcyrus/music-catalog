@@ -17,4 +17,10 @@ export default {
       params: { q: filterCondition },
     });
   },
+
+  // Still in Development*************************************
+  // filtered music_sheet by composer
+  search: function() {
+    return ajax.get('/library/filteredMusicbyComposer');
+  },
 };

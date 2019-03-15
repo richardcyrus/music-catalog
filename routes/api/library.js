@@ -10,5 +10,7 @@ const libraryController = require('../../controllers/musicLibrary');
 router.route('/').get(libraryController.findAll);
 // Extra filtered music_sheet
 router.route('/filteredMusic').get(libraryController.findFiltered);
+// Still in Development*************************************
+router.route('/filteredMusicbyComposer').get(libraryController.findByComposer);
 
 module.exports = router;
