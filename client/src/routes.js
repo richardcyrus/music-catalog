@@ -1,23 +1,32 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import PageHeader from './components/PageHeader';
-import PageFooter from './components/PageFooter';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import LibraryPage from './pages/library';
+import HomePage from './pages/home';
+
+import {
+  userIsAuthenticatedRedirect,
+  userIsNotAuthenticatedRedirect,
+} from './utils/authenticateRoutes';
+
+const Login = userIsNotAuthenticatedRedirect(HomePage);
+const Library = userIsAuthenticatedRedirect(LibraryPage);
 
 function Routes() {
   return (
-    <BrowserRouter>
-      <React.Fragment>
-        <PageHeader />
-        <main role="main" className="w3-container w3-main">
-          <Switch>
-            <Route exact path="/library" component={LibraryPage} />
-          </Switch>
-        </main>
-        <PageFooter />
-      </React.Fragment>
-    </BrowserRouter>
+    <React.Fragment>
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/library" component={Library} />
+    </React.Fragment>
   );
 }
 
-export default Routes;
+function mapStateToProps(state) {
+  return {
+    authentication: state.authentication,
+  };
+}
+
+export default connect(mapStateToProps)(Routes);

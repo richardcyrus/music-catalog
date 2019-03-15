@@ -1,16 +1,16 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Login from '../components/Login';
-import { logout, loginUser } from '../actions/authentication';
+// import { logout, loginUser } from '../actions/authentication';
+import { loginUser } from '../actions/authentication';
 import logo from '../assets/YourScore-vertical-01.png';
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.props.dispatch(logout());
+    // this.props.dispatch(logout());
 
     this.state = {
       username: '',

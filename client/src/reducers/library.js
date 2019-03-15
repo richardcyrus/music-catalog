@@ -1,5 +1,7 @@
 import { LOAD_LIBRARY_SUCCESS } from '../actions/types';
-import initialState from './initialState';
+const initialState = {
+  library: [],
+};
 
 export default (state = initialState.library, action) => {
   switch (action.type) {

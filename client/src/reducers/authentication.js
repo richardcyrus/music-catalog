@@ -4,9 +4,14 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
 } from '../actions/types';
+import jwtDecode from 'jwt-decode';
 
 const initialState = {
-  isAuthenticated: !localStorage.getItem('jwtToken'),
+  token: null,
+  username: null,
+  isAuthenticated: !!localStorage.getItem('token'),
+  loginInProcess: false,
+  statusText: null,
 };
 
 export default (state = initialState, action) => {
@@ -20,18 +25,27 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         loginInProcess: false,
         isAuthenticated: true,
-        user: action.user,
+        token: action.token,
+        username: jwtDecode(action.token).username,
+        statusText: 'You have logged in successfully.',
       });
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
         loginInProcess: false,
         isAuthenticated: false,
-        error: action.message,
+        token: null,
+        username: null,
+        statusText: `Authentication error: ${action.status} ${
+          action.statusText
+        }`,
       });
     case LOGOUT:
       return Object.assign({}, state, {
         loginInProcess: false,
         isAuthenticated: false,
+        token: null,
+        username: null,
+        statusText: 'You have logged out successfully',
       });
     default:
       return state;

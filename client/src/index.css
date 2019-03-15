@@ -10,11 +10,12 @@ img {
   position: relative;
 }
 
-/*main {*/
-/*top: 187px;*/
-/*position: relative;*/
-/*padding-top: 16px;*/
-/*}*/
+.library-list {
+  top: 187px;
+  position: relative;
+  padding-top: 16px;
+  padding-right: 16px;
+}
 
 .landing-page {
   align-content: center;

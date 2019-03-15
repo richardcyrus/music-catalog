@@ -10,7 +10,10 @@ const jwt = require('jsonwebtoken');
 module.exports = {
   loginUser: (req, res) => {
     // debug(req.user.userLogin);
-    const token = jwt.sign({ id: req.user.userLogin }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { username: req.user.userLogin },
+      process.env.JWT_SECRET
+    );
     res.status(200).json({
       auth: true,
       token: token,
