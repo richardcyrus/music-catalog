@@ -11,7 +11,7 @@ img {
 }
 table {
   width: 50%;
-  margin: 270px auto;
+  margin: 250px auto;
   float: none;
   text-align: center;
   background-color: white;
@@ -19,7 +19,7 @@ table {
 
 th {
   background-color: white;
-  font-size: 12px;
+  font-size: 15px;
 }
   
   td, th {
@@ -36,7 +36,7 @@ th {
   tr:nth-child(even) {
     background-color: #46a18e;
   }
-  
+
   body {
     font-family: "Lato", sans-serif;
     background-image: url("pic.jpg");
