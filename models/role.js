@@ -18,12 +18,13 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING(255),
         allowNull: true,
-        field: 'role_name',
+        unique: true,
+        field: 'name',
       },
       description: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: 'role_description',
+        field: 'description',
       },
     },
     {

@@ -18,22 +18,22 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING(512),
         allowNull: true,
-        field: 'performance_name',
+        field: 'name',
       },
       description: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: 'performance_description',
+        field: 'description',
       },
       startDate: {
         type: DataTypes.DATE,
         allowNull: true,
-        field: 'performance_start_date',
+        field: 'start_date',
       },
       endDate: {
         type: DataTypes.DATE,
         allowNull: true,
-        field: 'performance_end_date',
+        field: 'end_date',
       },
     },
     {

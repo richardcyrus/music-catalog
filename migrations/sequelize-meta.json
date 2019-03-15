@@ -1,0 +1,7 @@
+[
+  "20190308194209-change-column-names.js",
+  "20190308195448-add-unique-indexes.js",
+  "20190315150939-change-performance-column-names.js",
+  "20190315163705-change-role-column-names.js",
+  "20190315163904-change-role-add-unique.js"
+]
