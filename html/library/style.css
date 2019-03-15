@@ -9,9 +9,10 @@ img {
   display: flex;
   margin: 0 auto;
 }
+
 table {
   width: 50%;
-  margin: 250px auto;
+  margin: 260px auto;
   float: none;
   text-align: center;
   background-color: white;
