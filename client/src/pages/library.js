@@ -38,8 +38,23 @@ class LibraryPage extends React.Component {
     this.loadMusic();
   }
 
+  // Options to provide for dropdown
+  dbCols = ['', 'title', 'composer', 'arranger', 'voices'];
+
   handleInputChange = (event) => {
     const { name, value } = event.target;
+    // Code responsible for loading all music_sheet rows if filter fields are both empty
+    if (name === 'attribute' && value === '') {
+      if (this.state.value === '') {
+        this.loadMusic();
+      }
+    }
+    if (name === 'value' && value === '') {
+      if (this.state.attribute === '') {
+        this.loadMusic();
+      }
+    }
+
     this.setState({
       [name]: value,
     });
@@ -71,7 +86,6 @@ class LibraryPage extends React.Component {
         this.setState({ library });
       })
       .catch((err) => console.log(err));
-    // .then((res) => this.setState({ musicCatalog: res.data }))
   };
 
   render() {
@@ -114,6 +128,8 @@ class LibraryPage extends React.Component {
         <SearchBar
           handleInputChange={this.handleInputChange}
           handleSubmit={this.handleSubmit}
+          loadMusic={this.loadMusic}
+          dbCols={this.dbCols}
         />
         <ReactDataGrid
           columns={columns}

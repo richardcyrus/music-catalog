@@ -13,7 +13,6 @@ export default {
   },
   // filtered music_sheet
   search: function(filterCondition) {
-    console.log(filterCondition);
     return ajax.get('/library/filteredMusic', {
       params: { q: filterCondition },
     });
