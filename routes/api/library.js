@@ -8,9 +8,7 @@ const router = express.Router();
 const libraryController = require('../../controllers/musicLibrary');
 
 router.route('/').get(libraryController.findAll);
-// Extra filtered music_sheet
+// Filter main grid based on display column and value provided
 router.route('/filteredMusic').get(libraryController.findFiltered);
-// Still in Development*************************************
-router.route('/filteredMusicbyComposer').get(libraryController.findByComposer);
 
 module.exports = router;

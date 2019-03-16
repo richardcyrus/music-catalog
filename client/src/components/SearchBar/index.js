@@ -2,8 +2,6 @@ import React from 'react';
 import { Container, Form, FormControl, Button } from 'react-bootstrap';
 
 function SearchBar(props) {
-  let dbCols = ['title', 'composer', 'arranger'];
-
   return (
     <Container>
       <Form inline className="mb-2 justify-content-center">
@@ -14,8 +12,12 @@ function SearchBar(props) {
             name="attribute"
             onChange={props.handleInputChange}
           >
-            {props.dbCols.map((optionDrown) => {
-              return <option>{optionDrown}</option>;
+            {props.filterColumns.map((optionDrown) => {
+              return (
+                <option key={optionDrown.key} id={optionDrown.key}>
+                  {optionDrown.value}
+                </option>
+              );
             })}
           </select>
         </div>

@@ -38,9 +38,6 @@ class LibraryPage extends React.Component {
     this.loadMusic();
   }
 
-  // Options to provide for dropdown
-  dbCols = ['', 'title', 'composer', 'arranger', 'voices'];
-
   handleInputChange = (event) => {
     const { name, value } = event.target;
     // Code responsible for loading all music_sheet rows if filter fields are both empty
@@ -123,13 +120,25 @@ class LibraryPage extends React.Component {
       { key: 'purchasePrice', name: 'Cost', width: 64 },
     ];
 
+    // Options to provide for dropdown
+    const filterColumns = [
+      { key: 'blank', value: '' },
+      { key: 'SheetMusic_title', value: 'Title' },
+      { key: 'Composer_name', value: 'Composer' },
+      { key: 'Arranger_name', value: 'Arranger' },
+      { key: 'SheetMusic_voices', value: 'Voicing' },
+      { key: 'SheetMusic_style', value: 'Style' },
+      { key: 'Occasion_name', value: 'Occasion' },
+      { key: 'SheetMusic_quantityOnHand', value: 'Copies' },
+      { key: 'SheetMusic_purchasePrice', value: 'Cost' },
+    ];
     return (
       <div>
         <SearchBar
           handleInputChange={this.handleInputChange}
           handleSubmit={this.handleSubmit}
           loadMusic={this.loadMusic}
-          dbCols={this.dbCols}
+          filterColumns={filterColumns}
         />
         <ReactDataGrid
           columns={columns}
