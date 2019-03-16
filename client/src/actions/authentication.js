@@ -25,7 +25,7 @@ export function loginFailure(error) {
 }
 
 export function logout() {
-  localStorage.removeItem('jwtToken');
+  localStorage.removeItem('token');
   return { type: LOGOUT };
 }
 

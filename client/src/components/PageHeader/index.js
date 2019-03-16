@@ -55,7 +55,7 @@ class PageHeader extends React.Component {
               onClick={() => dispatch(logoutAndRedirect())}
               className="w3-bar-item w3-button w3-padding-large w3-hide-small"
             >
-              Logout
+              LOGOUT
             </a>
           ) : (
             ''
