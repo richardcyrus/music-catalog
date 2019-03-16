@@ -3,6 +3,8 @@
  *
  * (c) 2019 Richard Cyrus, Rojin Pourkhomami, Alexis Rogers, Santiago Sepulveda
  */
+const bcrypt = require('bcrypt');
+const BCRYPT_SALT_WORK_FACTOR = parseInt(process.env.SALT_WORK_FACTOR);
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -66,6 +68,23 @@ module.exports = (sequelize, DataTypes) => {
       freezeTableName: true,
     }
   );
+
+  User.prototype.validPassword = function(password) {
+    return bcrypt.compare(password, this.userPass);
+  };
+
+  User.beforeSave((user, options) => {
+    if (user.changed('userPass')) {
+      return bcrypt
+        .hash(user.userPass, BCRYPT_SALT_WORK_FACTOR)
+        .then((hash) => {
+          user.userPass = hash;
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    }
+  });
 
   User.associate = function(models) {
     // associations can be defined here

@@ -61,6 +61,7 @@ module.exports = {
       composers: ['Carey', 'Afanasieff', 'Weiss', 'Thiele'],
       arrangers: ['Gerald Gurss'],
       occasions: ['Holiday'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Sweet Little Jesus Boy',
@@ -73,6 +74,7 @@ module.exports = {
       lyricists: ['Robert MacGimsey'],
       arrangers: ['Janet Pummill'],
       occasions: ['Christmas'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Silver Bells',
@@ -87,6 +89,7 @@ module.exports = {
       lyricists: ['Jay Livingston', 'Ray Evans'],
       arrangers: ['Kevin Robison'],
       occasions: ['Holiday'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Love Is Love',
@@ -99,6 +102,7 @@ module.exports = {
       composers: ['Randi Driscoll'],
       lyricists: ['Randi Driscoll'],
       arrangers: ['Tim McKnight', 'Kevin Robison'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Little Drummer Boy',
@@ -109,6 +113,7 @@ module.exports = {
       composers: ['Katherine Kennicott Davis'],
       arrangers: ['Pentatonix', 'Paul Anthony'],
       occasions: ['Christmas'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Blue Christmas',
@@ -123,6 +128,7 @@ module.exports = {
       lyricists: ['Billy Hayes', 'Jay Johnson'],
       arrangers: ['Mac Huff'],
       occasions: ['Holiday'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Evening Prayer',
@@ -141,6 +147,7 @@ module.exports = {
       ],
       composers: ['Ola Gjeilo'],
       lyricists: ['St. Augustine'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Chanukah in Santa Monica',
@@ -152,6 +159,7 @@ module.exports = {
       composers: ['Tom Lehrer'],
       arrangers: ['Joshua Jacobson'],
       occasions: ['Holiday'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Joyful, Joyful, We Adore Thee',
@@ -162,6 +170,7 @@ module.exports = {
       accompaniments: ['Piano', 'Brass Quintet', 'Organ', 'Handbells'],
       composers: ['Ludwig van Beethoven', 'Ken Berg'],
       lyricists: ['Henry van Dyke'],
+      performances: ['Ghosts of Christmas Past'],
     },
     {
       title: 'Christmas Angel',
@@ -173,6 +182,7 @@ module.exports = {
       composers: ['Corlynn Hanney'],
       lyricists: ['Corlynn Hanney'],
       occasions: ['Christmas'],
+      performances: ['Ghosts of Christmas Past'],
     },
   ],
 };

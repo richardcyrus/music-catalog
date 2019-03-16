@@ -1,0 +1,8 @@
+[
+  "20190308184118-async-add-sheet-music.js",
+  "20190313232716-add-user.js",
+  "20190315145803-add-performances.js",
+  "20190315145808-add-members.js",
+  "20190315145751-add-user-roles.js",
+  "20190315164823-associate-music-to-performances.js"
+]

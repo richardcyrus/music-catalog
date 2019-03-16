@@ -1,14 +1,25 @@
 import axios from 'axios';
 
-const ajax = axios.create({
+const client = axios.create({
   headers: {
-    'Content-type': 'application/json',
+    'Content-Type': 'application/json',
   },
   baseURL: '/api/v1.0/',
+  responseType: 'json',
 });
 
 export default {
   listMusic: function() {
-    return ajax.get('/library');
+    return client.get('/library');
+  },
+  loginUser: function(user) {
+    return client.post('/user/login', user);
+  },
+  setAuthToken: function(token) {
+    if (token) {
+      client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete client.defaults.headers.common['Authorization'];
+    }
   },
 };
