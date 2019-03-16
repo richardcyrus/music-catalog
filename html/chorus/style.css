@@ -20,8 +20,14 @@ body{
   background-color: #f5f8fa;
 }
 
+table {
+  margin: 220px auto;
+  float: none;
+  text-align: center;
+}
+
 .my-form {
-  margin: 220px;
+  margin: auto;
 }
 
 .navbar-laravel
