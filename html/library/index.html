@@ -33,6 +33,11 @@
         </div>
     </div>
 
+
+
+<input id=‘fileid’ type=‘file’ hidden/>
+   <input id=‘buttonid’ type=‘button’ value=‘Upload MB’ />
+
     <table class="table" style="width:95%">
               <tr>
                 <th scope="col"></th>
@@ -116,9 +121,97 @@
             </tbody>
           </table>
 
+          <main class="my-form">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">Add Music</div>
+                                <div class="card-body">
+                                    <form name="my-form" onsubmit="return validform()" action="success.php" method="">
+                                        <div class="form-group row">
+                                            <label for="full_name" class="col-md-4 col-form-label text-md-right">Title</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="first_name" class="form-control" name="first-name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="full_name" class="col-md-4 col-form-label text-md-right">Composer</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="last_name" class="form-control" name="last-name">
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="email_address" class="col-md-4 col-form-label text-md-right">Arranger</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="email_address" class="form-control" name="email-address">
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Voicing</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="phone_number" class="form-control" name="phone-number">
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">Style</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="vocal_range" class="form-control" name="vocal-range">
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">Occassion</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="gender" class="form-control" name="gender">
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">Copies</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="pronouns" class="form-control" name="pronouns">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                          <label for="phone_number" class="col-md-4 col-form-label text-md-right">Cost</label>
+                                          <div class="col-md-6">
+                                              <input type="text" id="pronouns" class="form-control" name="pronouns">
+                                          </div>
+                                      </div>
+        
+                                            <div class="col-md-6 offset-md-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        
+        </main>
+
+
     <!-- <div class="footer">
         <p>YourScore 2019</p>
     </div> -->
 
+
+    <script>
+    document.getElementById(‘buttonid’).addEventListener(‘click’, openDialog);
+
+function openDialog() {
+  document.getElementById(‘fileid’).click();
+}
+    </script>
 </body>
 </html>
