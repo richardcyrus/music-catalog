@@ -1,175 +1,116 @@
 .logo {
-  width: 430px;
-  height: 320px;
-  display: block;
-  margin: 0 auto;
-  padding-top: 75px;
+  width: 500px;
+  height: 150px;
 }
 
-  body, html {
-    height: 100%;
+.main {
+  width: 700px;
+  height: 600px;
 }
 
-/* The hero image */
-.hero-image {
-
-  /* The image used */
- 
-
-  /* Full height */
-  height: 100%; 
- 
-  /* Position and center the image to scale nicely on all screens */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+.jackInTheBox {
+  -webkit-animation-name: jackInTheBox;
+  animation-name: jackInTheBox;
 }
 
 /* Place text in the middle of the image */
-.hero-text {
+.login-form {
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: black;
+  background-color: black;
+}
+
+.row-1 {
+  padding-top: 35%;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
 }
 
 h1 {
-  color: white;
+  color: #00a99d;
   font-family: 'Quicksand', sans-serif;
   font-weight: 200;
-  font-size: 25px;
+  font-size: 20px;
 }
 
-/* TYPEWRITER STYLES */ 
-  .typewriter p {
-    border-right: .15em #6EC5B8;
-    color: #FFD500;
-    font-family: 'Quicksand', sans-serif;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .typewriter p:nth-child(1) {
-    width: 50.3em;
-    -webkit-animation: type 2s steps(40, end);
-    animation: type 2s steps(40, end);
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-  }
+.modal-content {
+  background-color: #00a99d;
+  color: white;
+}
+
+.nav-link {
+  color: white;
+}
+
+.text {
+  color: #00a99d;
+}
+
+.modal-footer {
+  background-color: black;
+  color: white;
+}
+
+footer {
+  color: #000000;
+  font-size: 15px;
+  font-family: 'Quicksand';
+  text-align: center;
+  position: sticky;
+  padding: 3px;
+}
   
-  .typewriter p:nth-child(2) {
-    width: 50.5em;
+@-webkit-keyframes jackInTheBox {
+  from {
     opacity: 0;
-    -webkit-animation: type2 5s steps(40, end);
-    animation: type2 2s steps(40, end);
-    -webkit-animation-delay: 2s;
-    animation-delay: 2s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-  }
-  
-  .typewriter p:nth-child(3) {
-    width: 50.3em;
-    opacity: 0;
-    -webkit-animation: type3 2s steps(20, end), blink .5s step-end infinite alternate;
-    animation: type3 2s steps(20, end), blink .5s step-end infinite alternate;
-    -webkit-animation-delay: 4s;
-    animation-delay: 4s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
+    -webkit-transform: scale(0.1) rotate(30deg);
+    transform: scale(0.1) rotate(30deg);
+    -webkit-transform-origin: center bottom;
+    transform-origin: center bottom;
   }
 
-  
-  
-  @keyframes type {
-    0% {
-      width: 0;
-    }
-    99.9% {
-      border-right: .15em #6EC5B8;
-    }
-    100% {
-      border: none;
-    }
+  50% {
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
-  
-  @-webkit-keyframes type {
-    0% {
-      width: 0;
-    }
-    99.9% {
-      border-right: .15em #6EC5B8;
-    }
-    100% {
-      border: none;
-    }
+
+  70% {
+    -webkit-transform: rotate(3deg);
+    transform: rotate(3deg);
   }
-  
-  @keyframes type2 {
-    0% {
-      width: 0;
-    }
-    1% {
-      opacity: 1;
-    }
-    99.9% {
-      border-right: .15em #6EC5B8;
-    }
-    100% {
-      opacity: 1;
-      border: none;
-    }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
-  
-  @-webkit-keyframes type2 {
-    0% {
-      width: 0;
-    }
-    1% {
-      opacity: 1;
-    }
-    99.9% {
-      border-right: .15em #6EC5B8;
-    }
-    100% {
-      opacity: 1;
-      border: none;
-    }
+}
+
+@keyframes jackInTheBox {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.1) rotate(30deg);
+    transform: scale(0.1) rotate(30deg);
+    -webkit-transform-origin: center bottom;
+    transform-origin: center bottom;
   }
-  
-  @keyframes type3 {
-    0% {
-      width: 0;
-    }
-    1% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
+
+  50% {
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
-  
-  @-webkit-keyframes type3 {
-    0% {
-      width: 0;
-    }
-    1% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
+
+  70% {
+    -webkit-transform: rotate(3deg);
+    transform: rotate(3deg);
   }
-  
-  @keyframes blink {
-    50% {
-      border-color: transparent;
-    }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
-  @-webkit-keyframes blink {
-    50% {
-      border-color: transparent;
-    }
-  }
+}
