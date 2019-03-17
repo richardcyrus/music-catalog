@@ -3,14 +3,16 @@ img {
   height: 50px;
 }
 
-.w3-bar-item {
-  display: flex;
-  margin: 0 auto;
-}
+#addButton { 
+  justify-items: center;
+  width: 50%;
+};
 
 table {
   width: 50%;
-  margin: 260px auto;
+  padding: 8px;
+  display: flex;
+  position:relative;
   float: none;
   text-align: center;
   background-color: white;
@@ -33,7 +35,7 @@ th {
   }
   
   tr:nth-child(even) {
-    background-color: #46a18e;
+    background-color: lightgrey;
   }
 
   body {

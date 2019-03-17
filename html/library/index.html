@@ -17,6 +17,10 @@
   <nav class="navbar sticky-top navbar-dark bg-dark">
       <!-- Navbar content -->
       <a class="navbar-brand" href="#"><img src="../dashboard/YS-Logo-BRAND-01-01.png" alt="logo" onclick="window.location.href='../dashboard/index.html'"/></a>
+      <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="myInput" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search<span class="icon-search"></span></button>
+        </form>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -44,9 +48,10 @@
   </div>
     </nav>
 
+<br>
     <!-- Table -->
-    <table class="table" style="width:95%">
-              <tr>
+    <table class="table" style="width:90%" align="center">
+              <thead class="thead-dark"><tr>
                 <th scope="col"></th>
                 <th scope="col">Title</th>
                 <th scope="col">Composer</th>
@@ -126,8 +131,24 @@
                 <td></td>
             </tr>
             </tbody>
-          </table><br>
-          <button type="button" onclick="myFunction()">Add Music</button>
+          </table>
+
+    <!-- Add Music Button -->
+    <button type="button" id="addButton" style="width:90%" class="btn btn-dark btn-block" onclick="myFunction()">Add Music</button>
+    
+    <!-- Filter Search -->
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("table tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
+
+          
   
 </body>
 </html>
