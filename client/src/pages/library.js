@@ -3,6 +3,7 @@ import Api from '../utils/api';
 import logo from '../assets/YourScore-logo-white-02.png';
 import ReactDataGrid from 'react-data-grid';
 import SearchBar from '../components/SearchBar';
+import Detail from '../components/Detail';
 
 class LibraryPage extends React.Component {
   state = {
@@ -10,6 +11,9 @@ class LibraryPage extends React.Component {
     // Used to filter sheet music table
     attribute: '',
     value: '',
+    // Used to determine drill down functionality
+    showDetail: false,
+    rowData: [],
   };
 
   loadMusic() {
@@ -85,6 +89,26 @@ class LibraryPage extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  // Sets showDetail to true and grabs pertinent data and stores within detailData
+  toggleToTrue = (rowData) => {
+    console.log(rowData);
+    this.setState({
+      showDetail: true,
+      rowData: rowData,
+    });
+  };
+
+  toggleToFalse = () => {
+    this.setState({
+      showDetail: false,
+    });
+  };
+
+  // Toggles showDetail between true and false
+  toggleDetail = (rowData) => {
+    this.state.showDetail ? this.toggleToFalse() : this.toggleToTrue(rowData);
+  };
+
   render() {
     const rows = this.state.library;
     const ROW_COUNT = rows.length;
@@ -132,21 +156,31 @@ class LibraryPage extends React.Component {
       { key: 'SheetMusic_quantityOnHand', value: 'Copies' },
       { key: 'SheetMusic_purchasePrice', value: 'Cost' },
     ];
+
     return (
       <div>
-        <SearchBar
-          handleInputChange={this.handleInputChange}
-          handleSubmit={this.handleSubmit}
-          loadMusic={this.loadMusic}
-          filterColumns={filterColumns}
-        />
-        <ReactDataGrid
-          columns={columns}
-          rowGetter={(i) => rows[i]}
-          rowsCount={ROW_COUNT}
-          minHeight={410}
-          emptyRowsView={EmptyRowsView}
-        />
+        {this.state.showDetail ? (
+          <Detail rowData={this.state.rowData} />
+        ) : (
+          <div>
+            <SearchBar
+              handleInputChange={this.handleInputChange}
+              handleSubmit={this.handleSubmit}
+              loadMusic={this.loadMusic}
+              filterColumns={filterColumns}
+            />
+            <ReactDataGrid
+              columns={columns}
+              rowGetter={(i) => rows[i]}
+              rowsCount={ROW_COUNT}
+              minHeight={410}
+              emptyRowsView={EmptyRowsView}
+              onRowClick={(rowID, row) => {
+                this.toggleDetail(row);
+              }}
+            />
+          </div>
+        )}
       </div>
     );
   }
