@@ -1,56 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Lato|Quicksand');
+/*@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Quicksand:400,700');*/
+
+/*
+font-family: 'Lato', sans-serif;
+font-family: 'Quicksand', sans-serif;
+ */
 
 body {
   font-family: 'Lato', sans-serif;
+  font-weight: 400;
 }
 
-img {
-  display: flex;
-  margin: 0 auto;
-  position: relative;
+select.form-control,
+textarea.form-control,
+input.form-control {
+  font-size: 16px;
 }
 
-.library-list {
-  top: 187px;
-  position: relative;
-  padding-top: 16px;
-  padding-right: 16px;
-}
-
-.landing-page {
-  align-content: center;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-}
-
-.w3-bar-item {
-  display: flex;
-  margin: 0 auto;
-}
-
-.footer {
-  background-color: black;
-  bottom: 0;
-  color: white;
-  left: 0;
-  position: fixed;
-  text-align: center;
+input[type='file'] {
   width: 100%;
-}
-
-.hero-image > .logo {
-  margin: 0 auto;
-  width: 32.375rem;
-}
-
-.hero-text {
-  text-align: center;
-}
-
-.hero-text > h1 {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1.5625rem;
-  font-weight: 200;
 }

@@ -1,32 +1,28 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+// import AppliedRoute from './components/AppliedRoute';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+import UnauthenticatedRoute from './components/UnauthenticatedRoute';
+import NotFound from './containers/NotFound';
+import Login from './containers/Login';
+import Home from './containers/Home';
+import Library from './containers/Library';
 
-import LibraryPage from './pages/library';
-import HomePage from './pages/home';
-
-import {
-  userIsAuthenticatedRedirect,
-  userIsNotAuthenticatedRedirect,
-} from './utils/authenticateRoutes';
-
-const Login = userIsNotAuthenticatedRedirect(HomePage);
-const Library = userIsAuthenticatedRedirect(LibraryPage);
-
-function Routes() {
-  return (
-    <React.Fragment>
-      <Route exact path="/" component={HomePage} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/library" component={Library} />
-    </React.Fragment>
-  );
-}
-
-function mapStateToProps(state) {
-  return {
-    authentication: state.authentication,
-  };
-}
-
-export default connect(mapStateToProps)(Routes);
+export default ({ childProps }) => (
+  <Switch>
+    <AuthenticatedRoute path="/" exact component={Home} props={childProps} />
+    <AuthenticatedRoute
+      path="/library"
+      exact
+      component={Library}
+      props={childProps}
+    />
+    <UnauthenticatedRoute
+      path="/login"
+      exact
+      component={Login}
+      props={childProps}
+    />
+    <Route component={NotFound} />
+  </Switch>
+);

@@ -1,30 +1,55 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
-import { history } from './store';
-
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Routes from './routes';
-import NotFound from './pages/404';
 
-library.add(faBars, faSearch);
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
+// library.add(faBars, faSearch);
 
-const App = ({ store }) => (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Routes />
-        <Route component={NotFound} />
-      </Switch>
-    </ConnectedRouter>
-  </Provider>
-);
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-App.propTypes = {
-  store: PropTypes.object.isRequired,
-};
+    // Global Authentication Status
+    this.state = {
+      isAuthenticated: false,
+    };
+  }
 
-export default App;
+  componentDidMount() {
+    // If the JWT token is present, then (for now) we are authenticated.
+    this.userHasAuthenticated(!!localStorage.getItem('token'));
+  }
+
+  // Global handler for setting authentication status.
+  userHasAuthenticated = (authenticated) => {
+    this.setState({ isAuthenticated: authenticated });
+  };
+
+  // Global handler to logout.
+  handleLogout = (event) => {
+    localStorage.removeItem('token');
+
+    this.userHasAuthenticated(false);
+
+    // Set the redirect location.
+    this.props.history.push('/login');
+  };
+
+  render() {
+    // Collect the global handlers for authentication state.
+    const childProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      userHasAuthenticated: this.userHasAuthenticated,
+      handleLogout: this.handleLogout,
+    };
+
+    return (
+      <React.Fragment>
+        <Routes childProps={childProps} />
+      </React.Fragment>
+    );
+  }
+}
+
+export default withRouter(App);
