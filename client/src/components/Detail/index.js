@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, ListGroup } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 const showNonNullRowData = (rowData) => {
   let nonNullValues = [];
-  for (const key in rowData) {
+  for (let key in rowData) {
     if (rowData.hasOwnProperty(key)) {
       const element = rowData[key];
       if (
@@ -12,6 +12,13 @@ const showNonNullRowData = (rowData) => {
         key !== 'id' &&
         key !== 'title'
       ) {
+        if (key == 'purchasePrice') {
+          key = 'Cost';
+        }
+        if (key == 'quantityOnHand') {
+          key = 'Copies';
+        }
+
         nonNullValues.push(
           `${key.charAt(0).toLocaleUpperCase()}${key.slice(1)}: ${element}`
         );
@@ -33,15 +40,10 @@ function Detail(props) {
             <p key={element}>{element}</p>
           ))}
         </Card.Body>
-        {/* <ListGroup variant="flush">
-    <ListGroup.Item>Description:{rowData.description}</ListGroup.Item>
-    <ListGroup.Item>Genres:{rowData.genres}</ListGroup.Item>
-    <ListGroup.Item>Difficulty:{rowData.difficulty}</ListGroup.Item>
-    <ListGroup.Item>Duration:{rowData.duration}</ListGroup.Item>
-    <ListGroup.Item>Editors:{rowData.dditors}</ListGroup.Item>
-    <ListGroup.Item>Publisher:{rowData.publisher}</ListGroup.Item>
-  </ListGroup> */}
       </Card>
+      <div className="text-center">
+        <Button className="mt-2">Back to Library</Button>
+      </div>
     </div>
   );
 }
