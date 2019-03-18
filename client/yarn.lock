@@ -2285,7 +2285,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.2.6, classnames@^2.2.6:
+classnames@2.2.6, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -8573,11 +8573,6 @@ react-context-toolbox@^2.0.2:
   resolved "https://registry.yarnpkg.com/react-context-toolbox/-/react-context-toolbox-2.0.2.tgz#35637287cb23f801e6ed802c2bb7a97e1f04e3fb"
   integrity sha512-tY4j0imkYC3n5ZlYSgFkaw7fmlCp3IoQQ6DxpqeNHzcD0hf+6V+/HeJxviLUZ1Rv1Yn3N3xyO2EhkkZwHn0m1A==
 
-react-data-grid@6.0.2-0:
-  version "6.0.2-0"
-  resolved "https://registry.yarnpkg.com/react-data-grid/-/react-data-grid-6.0.2-0.tgz#b71691a911c99d53445d20bd8a7b281c0d4bf6da"
-  integrity sha512-OiE/EevjV70J60OGj2Pcy8P3uRQGvyD0Ata2NbXjE2rKOGUuJ7hau8WcvIFhAMP005LEV+pfqzZpkIYjD1u3OQ==
-
 react-dev-utils@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-7.0.3.tgz#f1316cfffd792fd41b0c28ad5db86c1d74484d6f"
@@ -8762,6 +8757,13 @@ react-scripts@2.1.5:
     workbox-webpack-plugin "3.6.3"
   optionalDependencies:
     fsevents "1.2.4"
+
+react-table@6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-6.9.0.tgz#de8190a1a3f32c5fa46697a6a6c640e984670f5d"
+  integrity sha512-sATtBTyXlQlqSaPayDv66e5JAS8zv1BmaCAm7UT8VzDD9Cvei90Lgx2Cn0HdGMh7BGDNUiVTSGRaNAzejs/Ohg==
+  dependencies:
+    classnames "^2.2.5"
 
 react-transition-group@^2.5.1:
   version "2.6.0"
