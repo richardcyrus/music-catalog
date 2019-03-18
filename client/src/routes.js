@@ -7,6 +7,7 @@ import NotFound from './containers/NotFound';
 import Login from './containers/Login';
 import Home from './containers/Home';
 import Library from './containers/Library';
+import Performances from './containers/Performances';
 
 export default ({ childProps }) => (
   <Switch>
@@ -15,6 +16,12 @@ export default ({ childProps }) => (
       path="/library"
       exact
       component={Library}
+      props={childProps}
+    />
+    <AuthenticatedRoute
+      path="/performances"
+      exact
+      component={Performances}
       props={childProps}
     />
     <UnauthenticatedRoute

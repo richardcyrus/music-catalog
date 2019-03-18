@@ -8,8 +8,10 @@ const express = require('express');
 const router = express.Router();
 const libraryRoutes = require('./library');
 const userRoutes = require('./user');
+const performanceRoutes = require('./performance');
 
 router.use('/library', libraryRoutes);
 router.use('/user', userRoutes);
+router.use('/performance', performanceRoutes);
 
 module.exports = router;

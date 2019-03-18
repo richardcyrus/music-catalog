@@ -28,6 +28,13 @@ class SiteWrapper extends Component {
               >
                 <Nav.Link>Library</Nav.Link>
               </LinkContainer>
+              <LinkContainer
+                to="/performances"
+                activeClassName="active"
+                className="nav-link"
+              >
+                <Nav.Link>Performances</Nav.Link>
+              </LinkContainer>
             </Nav>
             <Nav className="ml-auto">
               <Nav.Item>

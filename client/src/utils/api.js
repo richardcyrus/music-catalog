@@ -12,6 +12,9 @@ export default {
   listMusic: function() {
     return client.get('/library');
   },
+  findPerformances: function(pageSize, page) {
+    return client.get('/performance', { params: { pageSize, page } });
+  },
   loginUser: function(user) {
     return client.post('/user/login', user);
   },
