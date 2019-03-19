@@ -142,6 +142,14 @@ module.exports = (sequelize, DataTypes) => {
                 attributes: [],
               },
             },
+            {
+              model: sequelize.models.Performance,
+              as: 'performed',
+              attributes: ['name', 'startDate'],
+              through: {
+                attributes: [],
+              },
+            },
           ],
         },
       },
@@ -193,7 +201,7 @@ module.exports = (sequelize, DataTypes) => {
     SheetMusic.belongsToMany(models.Performance, {
       through: 'music_performed',
       foreignKey: 'sheet_music_id',
-      as: 'performances',
+      as: 'performed',
     });
     SheetMusic.belongsToMany(models.AssignedMusic, {
       through: 'music_assignments',
