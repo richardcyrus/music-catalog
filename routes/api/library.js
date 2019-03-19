@@ -6,7 +6,8 @@
 const express = require('express');
 const router = express.Router();
 const libraryController = require('../../controllers/musicLibrary');
+const checkToken = require('../middleware');
 
-router.route('/').get(libraryController.findAll);
+router.get('/', checkToken, libraryController.findAll);
 
 module.exports = router;

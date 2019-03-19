@@ -12,7 +12,8 @@ module.exports = {
     // debug(req.user.userLogin);
     const token = jwt.sign(
       { username: req.user.userLogin },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
     );
     res.status(200).json({
       auth: true,

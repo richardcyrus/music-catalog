@@ -6,7 +6,8 @@
 const express = require('express');
 const router = express.Router();
 const performanceController = require('../../controllers/performances');
+const checkToken = require('../middleware');
 
-router.route('/').get(performanceController.findAll);
+router.get('/', checkToken, performanceController.findAll);
 
 module.exports = router;
