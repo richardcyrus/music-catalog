@@ -23,8 +23,11 @@ const RenderForm = () => {
           type="password"
           component={FormInput}
         />
-        <button className="btn btn-primary" type="submit">
-          Login
+        <button
+          className="btn btn-login btn-lg btn-block text-uppercase mb-2 font-weight-bold"
+          type="submit"
+        >
+          Sign in
         </button>
       </Form>
     </React.Fragment>

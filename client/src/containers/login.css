@@ -1,0 +1,43 @@
+.login-page {
+  background-color: black;
+  padding-right: 0;
+}
+
+.login-page > .row {
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-tagline {
+  color: #00a99d;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.login-heading {
+  font-weight: 300;
+}
+
+.btn-login {
+  background-color: #3b4098;
+  border-color: #3b4098;
+  color: #ffffff;
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+.login-page__right {
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url(../assets/choir-pic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding: 0;
+}
