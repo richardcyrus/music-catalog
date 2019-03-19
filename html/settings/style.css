@@ -9,25 +9,48 @@ img {
   display: flex;
   margin: 0 auto;
 }
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width:70%; 
-    margin-left:15%; 
-    margin-right:15%;
-    margin-top:15%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-  
+
+body{
+  margin: 0;
+  font-size: .9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #212529;
+  text-align: left;
+  background-color: #f5f8fa;
+}
+
+.my-form {
+  margin: 220px auto;
+}
+
+.navbar-laravel
+{
+  box-shadow: 0 2px 4px rgba(0,0,0,.04);
+}
+
+.navbar-brand , .nav-link, .my-form, .login-form
+{
+  font-family: Raleway, sans-serif;
+}
+
+.my-form
+{
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.my-form .row
+{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.login-form
+{
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
   body {
     font-family: "Lato", sans-serif;
     background-image: url("pic.jpg");
@@ -35,12 +58,3 @@ table {
   background-size: 100% 100vh;
   }
   
-  .footer {
-     position: fixed;
-     left: 0;
-     bottom: 0;
-     width: 100%;
-     background-color: black;
-     color: white;
-     text-align: center;
-  }
