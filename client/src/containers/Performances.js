@@ -27,6 +27,7 @@ export default class Performances extends Component {
       ],
       data: [],
       pages: -1,
+      defaultPageSize: 10,
       loading: false,
     };
     this.fetchData = this.fetchData.bind(this);
@@ -42,7 +43,7 @@ export default class Performances extends Component {
 
     Api.findPerformances(state.pageSize, state.page).then((res) => {
       this.setState({
-        data: res.data.data,
+        data: res.data.rows,
         pages: res.data.pages,
         loading: false,
       });
@@ -50,7 +51,19 @@ export default class Performances extends Component {
   }
 
   render() {
-    const { columns, data, pages, loading } = this.state;
+    const {
+      columns,
+      data,
+      pages,
+      loading,
+      pageSize,
+      defaultPageSize,
+    } = this.state;
+
+    // minRows will remove empty rows if there aren't enough rows to meet
+    // the defaultPageSize.
+    const minRows =
+      data.length > 0 && data.length < defaultPageSize ? data.length : pageSize;
 
     return (
       <SiteWrapper {...this.props}>
@@ -59,10 +72,11 @@ export default class Performances extends Component {
           data={data}
           pages={pages}
           loading={loading}
+          minRows={minRows}
           onFetchData={this.fetchData}
           manual
           sortable={false}
-          defaultPageSize={10}
+          defaultPageSize={defaultPageSize}
           className="-striped -highlight"
         />
       </SiteWrapper>
