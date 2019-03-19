@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Routes from './routes';
+import Api from './utils/api';
 
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -17,8 +18,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // If the JWT token is present, then (for now) we are authenticated.
-    this.userHasAuthenticated(!!localStorage.getItem('token'));
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        Api.setAuthToken(token);
+        this.userHasAuthenticated(true);
+      }
+    } catch (e) {
+      Api.setAuthToken(false);
+      this.userHasAuthenticated(false);
+    }
   }
 
   // Global handler for setting authentication status.
@@ -29,6 +38,7 @@ class App extends Component {
   // Global handler to logout.
   handleLogout = (event) => {
     localStorage.removeItem('token');
+    Api.setAuthToken(false);
 
     this.userHasAuthenticated(false);
 
