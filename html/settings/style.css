@@ -1,8 +1,6 @@
 img {
-  position: relative;
-  display: flex;
-  margin: 0 auto;
-  cursor: pointer;
+  width: 90px;
+  height: 50px;
 }
 
 .w3-bar-item {

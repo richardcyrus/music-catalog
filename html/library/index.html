@@ -3,43 +3,55 @@
 <title>Project 3</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+</head>
 <body>
 
-    <!-- Navbar -->
-    <div class="w3-top">
-        <div class="w3-bar w3-black w3-card"><br>
-            <img src="./YourScore-logo-white-02.png" alt="logo" height="125" width="420" onclick="window.location.href='../dashboard/index.html'"/>
-            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
-                href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i
-                    class="fa fa-bars"></i></a>
-                    <a href="../dashboard/index.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-                    <a href="../library/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LIBRARY</a>
-                    <a href="../chorus/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CHORUS</a>
-                    <a href="../assignments/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ASSIGNMENTS</a>
-                    <a href="../settings/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">SETTINGS</a>
-                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                        <a href="#" class="w3-bar-item w3-button">Admin</a>
-                        <a href="#" class="w3-bar-item w3-button">Member</a>
-                    </div>
+   <!-- Navbar -->
+  <nav class="navbar sticky-top navbar-dark bg-dark">
+      <!-- Navbar content -->
+      <a class="navbar-brand" href="#"><img src="../dashboard/YS-Logo-BRAND-01-01.png" alt="logo" onclick="window.location.href='../dashboard/index.html'"/></a>
+      <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="myInput" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search<span class="icon-search"></span></button>
+        </form>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="../dashboard/index.html">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../library/index.html">Library</a><span class="sr-only">(current)</span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../assignments/index.html">Assignments</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account Settings
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="../settings/index.html">Change Password</a>
+          <a class="dropdown-item" href="../landing page/index.html">Log Out</a>
         </div>
-    </div>
+      </li>
+    </ul>
+  </div>
+    </nav>
 
-
-
-<input id=‘fileid’ type=‘file’ hidden/>
-   <input id=‘buttonid’ type=‘button’ value=‘Upload MB’ />
-
-    <table class="table" style="width:95%">
-              <tr>
+<br>
+    <!-- Table -->
+    <table class="table" style="width:90%" align="center">
+              <thead class="thead-dark"><tr>
                 <th scope="col"></th>
                 <th scope="col">Title</th>
                 <th scope="col">Composer</th>
@@ -121,6 +133,7 @@
             </tbody>
           </table>
 
+<<<<<<< HEAD
           <main class="my-form">
             <div class="container">
                 <div class="row justify-content-center">
@@ -214,12 +227,24 @@
     </div> -->
 
 
+=======
+    <!-- Add Music Button -->
+    <button type="button" id="addButton" style="width:90%" class="btn btn-dark btn-block" onclick="myFunction()">Add Music</button>
+    
+    <!-- Filter Search -->
+>>>>>>> cb5f49f77f49ef2af022af9180b9b7c457c11b80
     <script>
-    document.getElementById(‘buttonid’).addEventListener(‘click’, openDialog);
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("table tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
 
-function openDialog() {
-  document.getElementById(‘fileid’).click();
-}
-    </script>
+          
+  
 </body>
 </html>
