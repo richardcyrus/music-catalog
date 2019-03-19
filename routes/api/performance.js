@@ -9,5 +9,6 @@ const performanceController = require('../../controllers/performances');
 const checkToken = require('../middleware');
 
 router.get('/', checkToken, performanceController.findAll);
+router.get('/:id', checkToken, performanceController.find);
 
 module.exports = router;

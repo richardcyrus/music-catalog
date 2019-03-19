@@ -9,5 +9,6 @@ const memberController = require('../../controllers/members');
 const checkToken = require('../middleware');
 
 router.get('/', checkToken, memberController.findAll);
+router.get('/:id', checkToken, memberController.find);
 
 module.exports = router;

@@ -7,13 +7,15 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const userController = require('../../controllers/user');
+const checkToken = require('../middleware');
 
 router.post(
   '/login',
   passport.authenticate('local', { session: false }),
   userController.loginUser
 );
-// router.get('/find', userController.findUser);
 // router.post('/register', userController.registerUser);
+router.get('/', checkToken, userController.findAll);
+router.get('/:id', checkToken, userController.find);
 
 module.exports = router;

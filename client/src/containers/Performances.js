@@ -36,11 +36,6 @@ export default class Performances extends Component {
   fetchData(state, instance) {
     this.setState({ loading: true });
 
-    console.log(`Page Size: ${state.pageSize}`);
-    console.log(`Page: ${state.page}`);
-    console.log('Sorted: ', state.sorted);
-    console.log('Filtered: ', state.filtered);
-
     Api.findPerformances(state.pageSize, state.page).then((res) => {
       this.setState({
         data: res.data.rows,

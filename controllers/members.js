@@ -6,6 +6,18 @@
 const db = require('../models');
 const debug = require('debug')('your-score:memberController');
 
+const memberAttributes = [
+  'memberId',
+  'givenName',
+  'familyName',
+  'emailAddress',
+  'phoneNumber',
+  'mailingAddress',
+  'vocalRange',
+  'gender',
+  'pronoun',
+];
+
 module.exports = {
   findAll: function(req, res) {
     // Set a default record limit of 10, if the pageSize isn't provided.
@@ -31,17 +43,7 @@ module.exports = {
         debug('F&C:offset', offset);
 
         return db.Member.findAll({
-          attributes: [
-            'memberId',
-            'givenName',
-            'familyName',
-            'emailAddress',
-            'phoneNumber',
-            'mailingAddress',
-            'vocalRange',
-            'gender',
-            'pronoun',
-          ],
+          attributes: memberAttributes,
           limit: limit,
           offset: offset,
         }).then((results) => {
@@ -50,6 +52,18 @@ module.exports = {
             pages: pages,
             count: data.count,
           });
+        });
+      })
+      .catch((error) => res.status(422).json(error));
+  },
+  find: function(req, res) {
+    db.Member.findOne({
+      where: { memberId: req.params.id },
+      attributes: memberAttributes,
+    })
+      .then((data) => {
+        res.status(200).json({
+          data,
         });
       })
       .catch((error) => res.status(422).json(error));
