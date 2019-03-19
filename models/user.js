@@ -91,6 +91,22 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsToMany(models.Role, {
       through: 'user_roles',
       foreignKey: 'user_id',
+      as: 'roles',
+    });
+  };
+
+  User.loadScopes = function(models) {
+    User.addScope('withRoles', {
+      include: [
+        {
+          model: models.Role,
+          as: 'roles',
+          attributes: ['id', 'name', 'description'],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
   };
 
