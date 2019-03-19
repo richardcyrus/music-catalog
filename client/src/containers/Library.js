@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SiteWrapper from './SiteWrapper';
 import Api from '../utils/api';
 import ReactTable from 'react-table';
-import 'react-table/react-table.css';
 
 export default class Library extends Component {
   constructor(props) {

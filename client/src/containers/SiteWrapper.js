@@ -1,40 +1,74 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import { LinkContainer } from 'react-router-bootstrap';
+import 'react-table/react-table.css';
+import logo from '../assets/YourScore-logo-white-02.svg';
 
 class SiteWrapper extends Component {
   render() {
     return (
       <Fragment>
-        <Navbar bg="dark" variant="dark" expand="sm">
-          <Link to="/">Your Score</Link>
+        <Navbar
+          sticky="top"
+          bg="dark"
+          variant="dark"
+          expand="sm"
+          collapseOnSelect
+          className="mb-4"
+        >
+          <Navbar.Brand>
+            <img
+              src={logo}
+              width="110"
+              className="d-inline-block"
+              alt="Your Score"
+            />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="ys-navbar-nav" />
           <Navbar.Collapse id="ys-navbar-nav">
             <Nav className="mr-auto">
-              <LinkContainer
-                to="/"
-                activeClassName="active"
-                className="nav-link"
-              >
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
-              <LinkContainer
-                to="/library"
-                activeClassName="active"
-                className="nav-link"
-              >
-                <Nav.Link>Library</Nav.Link>
-              </LinkContainer>
-              <LinkContainer
-                to="/performances"
-                activeClassName="active"
-                className="nav-link"
-              >
-                <Nav.Link>Performances</Nav.Link>
-              </LinkContainer>
+              <Nav.Item>
+                <NavLink
+                  to="/"
+                  exact
+                  activeClassName="active"
+                  className="nav-link"
+                >
+                  Home
+                </NavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <NavLink
+                  to="/library"
+                  exact
+                  activeClassName="active"
+                  className="nav-link"
+                >
+                  Library
+                </NavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <NavLink
+                  to="/performances"
+                  exact
+                  activeClassName="active"
+                  className="nav-link"
+                >
+                  Performances
+                </NavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <NavLink
+                  to="/members"
+                  exact
+                  activeClassName="active"
+                  className="nav-link"
+                >
+                  Members
+                </NavLink>
+              </Nav.Item>
             </Nav>
             <Nav className="ml-auto">
               <Nav.Item>
@@ -43,10 +77,12 @@ class SiteWrapper extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Container>{this.props.children}</Container>
-        <footer className="mt-4 footer">
-          <Container>
-            <p>YourScore 2019</p>
+        <Container fluid as="main" className="main">
+          <Container fluid>{this.props.children}</Container>
+        </Container>
+        <footer className="d-flex justify-content-center py-3 mt-4 footer bg-dark text-white">
+          <Container fluid={true}>
+            <p className="text-center m-0">&copy; 2019 YourScore</p>
           </Container>
         </footer>
       </Fragment>
