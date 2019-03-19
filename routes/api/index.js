@@ -9,9 +9,11 @@ const router = express.Router();
 const libraryRoutes = require('./library');
 const userRoutes = require('./user');
 const performanceRoutes = require('./performance');
+const memberRoutes = require('./members');
 
 router.use('/library', libraryRoutes);
 router.use('/user', userRoutes);
 router.use('/performance', performanceRoutes);
+router.use('/members', memberRoutes);
 
 module.exports = router;

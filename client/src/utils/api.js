@@ -15,6 +15,9 @@ export default {
   findPerformances: function(pageSize, page) {
     return client.get('/performance', { params: { pageSize, page } });
   },
+  findMembers: function(pageSize, page) {
+    return client.get('/members', { params: { pageSize, page } });
+  },
   loginUser: function(user) {
     return client.post('/user/login', user);
   },
