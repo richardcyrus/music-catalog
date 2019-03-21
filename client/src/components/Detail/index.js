@@ -33,8 +33,10 @@ function Detail(props) {
   const { rowData, toggleToFalse } = props;
   return (
     <div className="h-100 justify-content-center">
-      <Card style={{ width: '50rem' }} className="mx-auto ">
-        <Card.Header className="text-center">{rowData.title}</Card.Header>
+      <Card style={{ width: '50rem' }} className="mx-auto">
+        <Card.Header className="text-center w3-black">
+          {rowData.title}
+        </Card.Header>
         <Card.Body>
           {showNonNullRowData(rowData).map((element) => (
             <p key={element}>{element}</p>
@@ -42,7 +44,7 @@ function Detail(props) {
         </Card.Body>
       </Card>
       <div className="text-center">
-        <Button className="mt-2" onClick={() => toggleToFalse()}>
+        <Button className="mt-2 w3-indigo" onClick={() => toggleToFalse()}>
           Back to Library
         </Button>
       </div>
