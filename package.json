@@ -1,0 +1,67 @@
+{
+  "name": "your-score",
+  "version": "1.0.0",
+  "repository": "https://github.com/richardcyrus/music-catalog.git",
+  "author": "Richard Cyrus <hello@rcyrus.com> (https://www.richardcyrus.com/)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "axios": "0.18.0",
+    "bcrypt": "3.0.4",
+    "cookie-parser": "1.4.4",
+    "cors": "2.8.5",
+    "debug": "4.1.1",
+    "dotenv": "6.2.0",
+    "express": "4.16.4",
+    "helmet": "3.15.1",
+    "if-env": "1.0.4",
+    "jsonwebtoken": "8.5.0",
+    "morgan": "1.9.1",
+    "mysql2": "1.6.5",
+    "passport": "0.4.0",
+    "passport-jwt": "4.0.0",
+    "passport-local": "1.0.0",
+    "sequelize": "4.42.1"
+  },
+  "devDependencies": {
+    "concurrently": "4.1.0",
+    "cross-env": "5.2.0",
+    "eslint": "5.12.0",
+    "eslint-config-prettier": "4.1.0",
+    "eslint-plugin-import": "2.16.0",
+    "eslint-plugin-node": "8.0.1",
+    "eslint-plugin-prettier": "3.0.1",
+    "eslint-plugin-promise": "4.0.1",
+    "husky": "1.3.1",
+    "json": "9.0.6",
+    "lint-staged": "8.1.5",
+    "nodemon": "1.18.10",
+    "prettier": "1.16.4",
+    "sequelize-cli": "5.4.0"
+  },
+  "scripts": {
+    "start": "if-env NODE_ENV=production && yarn run start:prod || yarn run start:dev",
+    "start:prod": "node ./bin/www",
+    "start:dev": "concurrently \"cross-env DEBUG=your-score:* nodemon ./bin/www\" \"yarn run client\"",
+    "client": "cd client && yarn start",
+    "install": "cd client && yarn install",
+    "build": "cd client && yarn build",
+    "heroku-postbuild": "cd client && yarn --production=false && yarn build"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "engines": {
+    "node": ">=8.9.0",
+    "yarn": ">=1.9.2",
+    "npm": ">=6.0.0"
+  }
+}
