@@ -6,6 +6,7 @@
 const db = require('../models');
 // eslint-disable-next-line no-unused-vars
 const debug = require('debug')('your-score:libraryController');
+const Op = db.Sequelize.Op;
 
 const defaultAttributes = [
   'id',
@@ -26,6 +27,90 @@ module.exports = {
     const limit = parseInt(req.query.pageSize) || 10;
     let offset = 0;
 
+    // Start building the database query conditions.
+    const filter = {
+      attributes: defaultAttributes,
+    };
+
+    // If we have the column and value parameters, add them to the
+    // query conditions.
+    const { column, value } = req.query;
+    switch (column) {
+      case 'title':
+        filter.where = {
+          title: {
+            [Op.like]: `%${value}%`,
+          },
+        };
+        break;
+      case 'voices':
+        filter.where = {
+          voices: {
+            [Op.like]: `%${value}%`,
+          },
+        };
+        break;
+      case 'style':
+        filter.where = {
+          style: {
+            [Op.like]: `%${value}%`,
+          },
+        };
+        break;
+      case 'composers':
+        filter.include = [
+          {
+            model: db.Composer,
+            as: 'composers',
+            attributes: ['name'],
+            through: {
+              attributes: [],
+            },
+            where: {
+              name: {
+                [Op.like]: `%${value}%`,
+              },
+            },
+          },
+        ];
+        break;
+      case 'arrangers':
+        filter.include = [
+          {
+            model: db.Arranger,
+            as: 'arrangers',
+            attributes: ['name'],
+            through: {
+              attributes: [],
+            },
+            where: {
+              name: {
+                [Op.like]: `%${value}%`,
+              },
+            },
+          },
+        ];
+        break;
+      case 'occasions':
+        filter.include = [
+          {
+            model: db.Occasion,
+            as: 'occasions',
+            attributes: ['name'],
+            through: {
+              attributes: [],
+            },
+            where: {
+              name: {
+                [Op.like]: `%${value}%`,
+              },
+            },
+          },
+        ];
+        break;
+    }
+
+    // Collect the number of pages based on the react-table setup.
     db.SheetMusic.findAndCountAll()
       .then((data) => {
         // react-table starts at page 0, so set here if not provided.
@@ -37,9 +122,10 @@ module.exports = {
         // Set the offset for the query based on the page number.
         offset = page > 0 ? limit * page : offset;
 
+        // Execute the final query with all relevant conditions.
         return db.SheetMusic.scope('library')
           .findAll({
-            attributes: defaultAttributes,
+            ...filter,
             limit: limit,
             offset: offset,
           })
