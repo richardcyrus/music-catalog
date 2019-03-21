@@ -9,8 +9,8 @@ const client = axios.create({
 });
 
 export default {
-  listLibrary: (pageSize, page) => {
-    return client.get('/library', { params: { pageSize, page } });
+  listLibrary: (query) => {
+    return client.get('/library', { params: query });
   },
   addScore: (score) => {
     return client.post('/library', score);
