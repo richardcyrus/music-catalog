@@ -8,13 +8,14 @@ const ajax = axios.create({
 });
 
 export default {
-  listMusic: function() {
-    return ajax.get('/library');
+  // all sheet_music
+  listMusic: function(pageSize, page) {
+    return ajax.get('/library', { params: { pageSize, page } });
   },
-  // filtered music_sheet
-  search: function(filterCondition) {
+  // filtered sheet_music
+  search: function(pageSize, page, filterCondition) {
     return ajax.get('/library/filteredMusic', {
-      params: { q: filterCondition },
+      params: { pageSize, page, filterCondition },
     });
   },
 };

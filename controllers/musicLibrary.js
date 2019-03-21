@@ -22,110 +22,264 @@ const attributes = [
 
 module.exports = {
   findAll: function(req, res) {
-    db.SheetMusic.scope('library')
-      .findAll({
-        attributes,
+    // Set a default record limit of 10, if the pageSize isn't provided.
+    const limit = parseInt(req.query.pageSize) || 10;
+    let offset = 0;
+
+    debug('limit', limit);
+    debug('offset', offset);
+
+    db.SheetMusic.findAndCountAll()
+      .then((data) => {
+        // react-table starts at page 0, so set here if not provided.
+        const page = parseInt(req.query.page) || 0;
+
+        // Calculate the total number of pages based on the limit.
+        const pages = Math.ceil(data.count / limit);
+
+        // Set the offset for the query based on the page number.
+        offset = page > 0 ? limit * page : offset;
+
+        debug('F&C:page', page);
+        debug('F&C:pages', pages);
+        debug('F&C:offset', offset);
+
+        return db.SheetMusic.scope('library')
+          .findAll({
+            attributes,
+            limit: limit,
+            offset: offset,
+          })
+          .then((results) => {
+            res.status(200).json({
+              rows: results,
+              pages: pages,
+              count: data.count,
+            });
+          });
       })
-      .then((records) => res.json(records))
       .catch((error) => res.status(422).json(error));
   },
+
   // filtered by column value
   findFiltered: function(req, res) {
-    let { q: params } = req.query;
-    params = JSON.parse(params);
-    const { tableColumn, tableValue } = params;
+    const limit = parseInt(req.query.pageSize) || 10;
+    let offset = 0;
+    debug('limit', limit);
+    debug('offset', offset);
+
+    let { filterCondition } = req.query;
+    filterCondition = JSON.parse(filterCondition);
+    const { tableColumn, tableValue } = filterCondition;
     switch (tableColumn) {
-      case 'Title':
-        tableColumn.toLowerCase();
-        db.SheetMusic.scope('library')
-          .findAll({
-            attributes,
-            where: {
-              [tableColumn]: tableValue,
-            },
+      case 'title':
+        db.SheetMusic.findAndCountAll()
+          .then((data) => {
+            // react-table starts at page 0, so set here if not provided.
+            const page = parseInt(req.query.page) || 0;
+
+            // Calculate the total number of pages based on the limit.
+            const pages = Math.ceil(data.count / limit);
+
+            // Set the offset for the query based on the page number.
+            offset = page > 0 ? limit * page : offset;
+
+            debug('F&C:page', page);
+            debug('F&C:pages', pages);
+            debug('F&C:offset', offset);
+
+            return db.SheetMusic.scope('library')
+              .findAll({
+                attributes,
+                limit: limit,
+                offset: offset,
+                where: {
+                  [tableColumn]: tableValue,
+                },
+              })
+              .then((results) => {
+                res.status(200).json({
+                  rows: results,
+                  pages: pages,
+                  count: data.count,
+                });
+              });
           })
-          .then((records) => res.json(records))
           .catch((error) => res.status(422).json(error));
         break;
-      case 'Composer':
-        db.SheetMusic.scope('library')
-          .findAll({
-            attributes,
-            include: [
-              {
-                model: db.Composer,
-                as: 'composers',
-                attributes: ['name'],
-                through: {
-                  attributes: [],
-                },
-                where: {
-                  name: tableValue,
-                },
-              },
-            ],
+      case 'composers':
+        db.SheetMusic.findAndCountAll()
+          .then((data) => {
+            // react-table starts at page 0, so set here if not provided.
+            const page = parseInt(req.query.page) || 0;
+
+            // Calculate the total number of pages based on the limit.
+            const pages = Math.ceil(data.count / limit);
+
+            // Set the offset for the query based on the page number.
+            offset = page > 0 ? limit * page : offset;
+
+            debug('F&C:page', page);
+            debug('F&C:pages', pages);
+            debug('F&C:offset', offset);
+
+            return db.SheetMusic.scope('library')
+              .findAll({
+                attributes,
+                limit: limit,
+                offset: offset,
+                include: [
+                  {
+                    model: db.Composer,
+                    as: 'composers',
+                    attributes: ['name'],
+                    through: {
+                      attributes: [],
+                    },
+                    where: {
+                      name: tableValue,
+                    },
+                  },
+                ],
+              })
+              .then((results) => {
+                res.status(200).json({
+                  rows: results,
+                  pages: pages,
+                  count: data.count,
+                });
+              });
           })
-          .then((records) => res.json(records))
           .catch((error) => res.status(422).json(error));
         break;
-      case 'Arranger':
-        db.SheetMusic.scope('library')
-          .findAll({
-            attributes,
-            include: [
-              {
-                model: db.Arranger,
-                as: 'arrangers',
-                attributes: ['name'],
-                through: {
-                  attributes: [],
-                },
-                where: {
-                  name: tableValue,
-                },
-              },
-            ],
+      case 'arrangers':
+        db.SheetMusic.findAndCountAll()
+          .then((data) => {
+            // react-table starts at page 0, so set here if not provided.
+            const page = parseInt(req.query.page) || 0;
+
+            // Calculate the total number of pages based on the limit.
+            const pages = Math.ceil(data.count / limit);
+
+            // Set the offset for the query based on the page number.
+            offset = page > 0 ? limit * page : offset;
+
+            debug('F&C:page', page);
+            debug('F&C:pages', pages);
+            debug('F&C:offset', offset);
+
+            return db.SheetMusic.scope('library')
+              .findAll({
+                attributes,
+                limit: limit,
+                offset: offset,
+                include: [
+                  {
+                    model: db.Arranger,
+                    as: 'arrangers',
+                    attributes: ['name'],
+                    through: {
+                      attributes: [],
+                    },
+                    where: {
+                      name: tableValue,
+                    },
+                  },
+                ],
+              })
+              .then((results) => {
+                res.status(200).json({
+                  rows: results,
+                  pages: pages,
+                  count: data.count,
+                });
+              });
           })
-          .then((records) => res.json(records))
           .catch((error) => res.status(422).json(error));
         break;
       case 'Voicing':
         break;
-      case 'Style':
-        tableColumn.toLowerCase();
-        db.SheetMusic.scope('library')
-          .findAll({
-            attributes,
-            where: {
-              [tableColumn]: tableValue,
-            },
-          })
-          .then((records) => res.json(records))
-          .catch((error) => res.status(422).json(error));
-        break;
-      case 'Occasion':
-        console.log('use Occasion model');
-        db.SheetMusic.scope('library')
-          .findAll({
-            attributes,
-            include: [
-              {
-                model: db.Occasion,
-                as: 'occasions',
-                attributes: ['name'],
-                through: {
-                  attributes: [],
-                },
+      case 'style':
+        db.SheetMusic.findAndCountAll()
+          .then((data) => {
+            // react-table starts at page 0, so set here if not provided.
+            const page = parseInt(req.query.page) || 0;
+
+            // Calculate the total number of pages based on the limit.
+            const pages = Math.ceil(data.count / limit);
+
+            // Set the offset for the query based on the page number.
+            offset = page > 0 ? limit * page : offset;
+
+            debug('F&C:page', page);
+            debug('F&C:pages', pages);
+            debug('F&C:offset', offset);
+
+            return db.SheetMusic.scope('library')
+              .findAll({
+                attributes,
+                limit: limit,
+                offset: offset,
                 where: {
-                  name: tableValue,
+                  [tableColumn]: tableValue,
                 },
-              },
-            ],
+              })
+              .then((results) => {
+                res.status(200).json({
+                  rows: results,
+                  pages: pages,
+                  count: data.count,
+                });
+              });
           })
-          .then((records) => res.json(records))
           .catch((error) => res.status(422).json(error));
         break;
-      case 'Copies':
+      case 'occasions':
+        db.SheetMusic.findAndCountAll()
+          .then((data) => {
+            // react-table starts at page 0, so set here if not provided.
+            const page = parseInt(req.query.page) || 0;
+
+            // Calculate the total number of pages based on the limit.
+            const pages = Math.ceil(data.count / limit);
+
+            // Set the offset for the query based on the page number.
+            offset = page > 0 ? limit * page : offset;
+
+            debug('F&C:page', page);
+            debug('F&C:pages', pages);
+            debug('F&C:offset', offset);
+
+            return db.SheetMusic.scope('library')
+              .findAll({
+                attributes,
+                limit: limit,
+                offset: offset,
+                include: [
+                  {
+                    model: db.Occasion,
+                    as: 'occasions',
+                    attributes: ['name'],
+                    through: {
+                      attributes: [],
+                    },
+                    where: {
+                      name: tableValue,
+                    },
+                  },
+                ],
+              })
+              .then((results) => {
+                res.status(200).json({
+                  rows: results,
+                  pages: pages,
+                  count: data.count,
+                });
+              });
+          })
+          .catch((error) => res.status(422).json(error));
+        break;
+      case 'quantityOnHand':
         tableColumn.toLowerCase();
         db.SheetMusic.scope('library')
           .findAll({
@@ -137,7 +291,7 @@ module.exports = {
           .then((records) => res.json(records))
           .catch((error) => res.status(422).json(error));
         break;
-      case 'Cost':
+      case 'purchasePrice':
         tableColumn.toLowerCase();
         db.SheetMusic.scope('library')
           .findAll({

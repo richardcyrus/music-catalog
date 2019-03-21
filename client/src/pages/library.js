@@ -1,189 +1,162 @@
-import React from 'react';
+import React, { Component } from 'react';
+// import SiteWrapper from './SiteWrapper';
 import Api from '../utils/api';
-import logo from '../assets/YourScore-logo-white-02.png';
-import ReactDataGrid from 'react-data-grid';
-import SearchBar from '../components/SearchBar';
-import Detail from '../components/Detail';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
+import { stat } from 'fs';
 
-class LibraryPage extends React.Component {
-  state = {
-    library: [],
-    // Used to filter sheet music table
-    attribute: '',
-    value: '',
-    // Used to determine drill down functionality
-    showDetail: false,
-    rowData: [],
-  };
+export default class Library extends Component {
+  constructor(props) {
+    super(props);
 
-  loadMusic() {
-    Api.listMusic()
-      .then((res) => {
-        const library = res.data.map((item) => {
-          return {
-            ...item,
-            occasions: item.occasions.map((o) => o.name).join(', '),
-            composers: item.composers.map((o) => o.name).join(', '),
-            arrangers: item.arrangers.map((o) => o.name).join(', '),
-            editors: item.editors.map((o) => o.name).join(', '),
-            genres: item.genres.map((o) => o.name).join(', '),
-            languages: item.languages.map((o) => o.language).join(', '),
-            lyricists: item.lyricists.map((o) => o.name).join(', '),
-            accompaniments: item.accompaniments.map((o) => o.name).join(', '),
-          };
-        });
-
-        this.setState({ library });
-      })
-      .catch((error) => console.log(error));
-  }
-
-  componentDidMount() {
-    this.loadMusic();
-  }
-
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    // Code responsible for loading all music_sheet rows if filter fields are both empty
-    if (name === 'attribute' && value === '') {
-      if (this.state.value === '') {
-        this.loadMusic();
-      }
-    }
-    if (name === 'value' && value === '') {
-      if (this.state.attribute === '') {
-        this.loadMusic();
-      }
-    }
-
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    let filteringConditions = {
-      tableColumn: this.state.attribute,
-      tableValue: this.state.value,
+    this.state = {
+      columns: [
+        {
+          accessor: 'title',
+          Header: 'Title',
+          style: { whiteSpace: 'unset' },
+          filterable: true,
+        },
+        {
+          accessor: 'composers',
+          Header: 'Composers',
+          style: { whiteSpace: 'unset' },
+          filterable: true,
+        },
+        {
+          accessor: 'arrangers',
+          Header: 'Arranger',
+          style: { whiteSpace: 'unset' },
+          filterable: true,
+        },
+        {
+          accessor: 'voices',
+          Header: 'Voicing',
+          style: { whiteSpace: 'unset' },
+        },
+        { accessor: 'style', Header: 'Style', filterable: true },
+        {
+          accessor: 'occasions',
+          Header: 'Occasion',
+          style: { whiteSpace: 'unset' },
+          filterable: true,
+        },
+        {
+          accessor: 'quantityOnHand',
+          Header: 'Copies',
+          width: 64,
+          style: { textAlign: 'right' },
+        },
+        {
+          accessor: 'purchasePrice',
+          Header: 'Cost',
+          width: 64,
+          style: { textAlign: 'right' },
+        },
+      ],
+      data: [],
+      pages: -1,
+      defaultPageSize: 10,
+      loading: false,
     };
+  }
 
-    Api.search(filteringConditions)
+  fetchData = (state, instance) => {
+    this.setState({ loading: true });
+
+    Api.listMusic(state.pageSize, state.page)
       .then((res) => {
-        const library = res.data.map((item) => {
+        const rows = res.data.rows.map((record) => {
           return {
-            ...item,
-            occasions: item.occasions.map((o) => o.name).join(', '),
-            composers: item.composers.map((o) => o.name).join(', '),
-            arrangers: item.arrangers.map((o) => o.name).join(', '),
-            editors: item.editors.map((o) => o.name).join(', '),
-            genres: item.genres.map((o) => o.name).join(', '),
-            languages: item.languages.map((o) => o.language).join(', '),
-            lyricists: item.lyricists.map((o) => o.name).join(', '),
-            accompaniments: item.accompaniments.map((o) => o.name).join(', '),
+            ...record,
+            occasions: record.occasions.map((o) => o.name).join(', '),
+            composers: record.composers.map((o) => o.name).join(', '),
+            arrangers: record.arrangers.map((o) => o.name).join(', '),
+            editors: record.editors.map((o) => o.name).join(', '),
+            genres: record.genres.map((o) => o.name).join(', '),
+            languages: record.languages.map((o) => o.language).join(', '),
+            lyricists: record.lyricists.map((o) => o.name).join(', '),
+            accompaniments: record.accompaniments.map((o) => o.name).join(', '),
           };
         });
+        this.setState({
+          data: rows,
+          pages: res.data.pages,
+          loading: false,
+        });
+      })
+      .catch((err) => console.log(err));
 
-        this.setState({ library });
+    let { filtered } = state;
+    if (filtered.length > 0) {
+      const index = filtered.length - 1;
+      let filteringConditions = {};
+      filteringConditions.tableColumn = filtered[index].id;
+      filteringConditions.tableValue = filtered[index].value;
+      if (filteringConditions.tableValue.length > 2) {
+        this.handleFilter(state.pageSize, state.page, filteringConditions);
+      }
+    }
+  };
+
+  // Responsible for handling live filter for columns
+  handleFilter = (pageSize, page, filteringConditions) => {
+    Api.search(pageSize, page, filteringConditions)
+      .then((res) => {
+        const rows = res.data.rows.map((record) => {
+          return {
+            ...record,
+            occasions: record.occasions.map((o) => o.name).join(', '),
+            composers: record.composers.map((o) => o.name).join(', '),
+            arrangers: record.arrangers.map((o) => o.name).join(', '),
+            editors: record.editors.map((o) => o.name).join(', '),
+            genres: record.genres.map((o) => o.name).join(', '),
+            languages: record.languages.map((o) => o.language).join(', '),
+            lyricists: record.lyricists.map((o) => o.name).join(', '),
+            accompaniments: record.accompaniments.map((o) => o.name).join(', '),
+          };
+        });
+        this.setState({
+          data: rows,
+          pages: res.data.pages,
+          loading: false,
+        });
       })
       .catch((err) => console.log(err));
   };
 
-  // Sets showDetail to true and grabs pertinent data and stores within detailData
-  toggleToTrue = (rowData) => {
-    console.log(rowData);
-    this.setState({
-      showDetail: true,
-      rowData: rowData,
-    });
-  };
-
-  toggleToFalse = () => {
-    this.setState({
-      showDetail: false,
-    });
-  };
-
-  // Toggles showDetail between true and false
-  toggleDetail = (rowData) => {
-    this.state.showDetail ? this.toggleToFalse() : this.toggleToTrue(rowData);
-  };
-
   render() {
-    const rows = this.state.library;
-    const ROW_COUNT = rows.length;
-    // const ROW_COUNT = 0;
-    // const defaultColumnProperties = {
-    //   resizable: true
-    // };
+    const {
+      columns,
+      data,
+      pages,
+      loading,
+      pageSize,
+      defaultPageSize,
+    } = this.state;
 
-    const EmptyRowsView = () => {
-      const message = 'No data to show';
-      return (
-        <div
-          style={{
-            textAlign: 'center',
-            backgroundColor: '#ddd',
-            padding: '100px',
-          }}
-        >
-          <img src={logo} alt={message} height="125" width="420" />
-          <h3>{message}</h3>
-        </div>
-      );
-    };
-
-    const columns = [
-      { key: 'title', name: 'Title' },
-      { key: 'composers', name: 'Composers' },
-      { key: 'arrangers', name: 'Arranger' },
-      { key: 'voices', name: 'Voicing' },
-      { key: 'style', name: 'Style' },
-      { key: 'occasions', name: 'Occasion' },
-      { key: 'quantityOnHand', name: 'Copies', width: 64 },
-      { key: 'purchasePrice', name: 'Cost', width: 64 },
-    ];
-
-    // Options to provide for dropdown
-    const filterColumns = [
-      { key: 'blank', value: '' },
-      { key: 'SheetMusic_title', value: 'Title' },
-      { key: 'Composer_name', value: 'Composer' },
-      { key: 'Arranger_name', value: 'Arranger' },
-      { key: 'SheetMusic_voices', value: 'Voicing' },
-      { key: 'SheetMusic_style', value: 'Style' },
-      { key: 'Occasion_name', value: 'Occasion' },
-      { key: 'SheetMusic_quantityOnHand', value: 'Copies' },
-      { key: 'SheetMusic_purchasePrice', value: 'Cost' },
-    ];
+    // minRows will remove empty rows if there aren't enough rows to meet
+    // the defaultPageSize.
+    const minRows =
+      data.length > 0 && data.length < defaultPageSize ? data.length : pageSize;
 
     return (
-      <div>
-        {this.state.showDetail ? (
-          <Detail rowData={this.state.rowData} />
-        ) : (
-          <div>
-            <SearchBar
-              handleInputChange={this.handleInputChange}
-              handleSubmit={this.handleSubmit}
-              loadMusic={this.loadMusic}
-              filterColumns={filterColumns}
-            />
-            <ReactDataGrid
-              columns={columns}
-              rowGetter={(i) => rows[i]}
-              rowsCount={ROW_COUNT}
-              minHeight={410}
-              emptyRowsView={EmptyRowsView}
-              onRowClick={(rowID, row) => {
-                this.toggleDetail(row);
-              }}
-            />
-          </div>
-        )}
-      </div>
+      <ReactTable
+        columns={columns}
+        data={data}
+        pages={pages} // Newly added
+        loading={loading} // Newly added
+        onFetchData={this.fetchData} // Newly added
+        manual // Newly added in regards for filtering, paging, and sorting
+        sortable={false} // Newly added
+        defaultPageSize={defaultPageSize} // Modified
+        className="-striped -highlight"
+        minRows={minRows}
+        // onFilteredChange={(filtered,column) => {
+        //   this.handleFilter(filtered,column,this.state)
+        // }
+        // }
+      />
     );
   }
 }
-
-export default LibraryPage;
