@@ -36,3 +36,7 @@ input.form-control {
 input[type='file'] {
   width: 100%;
 }
+
+.ReactTable .rt-head {
+  overflow-y: scroll;
+}
