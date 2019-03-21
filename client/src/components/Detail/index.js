@@ -30,7 +30,7 @@ const showNonNullRowData = (rowData) => {
 };
 
 function Detail(props) {
-  const { rowData } = props;
+  const { rowData, toggleToFalse } = props;
   return (
     <div className="h-100 justify-content-center">
       <Card style={{ width: '50rem' }} className="mx-auto ">
@@ -42,7 +42,9 @@ function Detail(props) {
         </Card.Body>
       </Card>
       <div className="text-center">
-        <Button className="mt-2">Back to Library</Button>
+        <Button className="mt-2" onClick={() => toggleToFalse()}>
+          Back to Library
+        </Button>
       </div>
     </div>
   );

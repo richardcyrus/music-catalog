@@ -4,6 +4,7 @@ import Api from '../utils/api';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { stat } from 'fs';
+import Detail from '../components/Detail';
 
 export default class Library extends Component {
   constructor(props) {
@@ -58,6 +59,9 @@ export default class Library extends Component {
       pages: -1,
       defaultPageSize: 10,
       loading: false,
+      // Used to determine drill down functionality
+      showDetail: false,
+      rowData: [],
     };
   }
 
@@ -125,6 +129,27 @@ export default class Library extends Component {
       .catch((err) => console.log(err));
   };
 
+  // Sets showDetail to true and grabs pertinent data and stores within detailData
+  toggleToTrue = (rowData) => {
+    let { original } = rowData;
+    console.log(original);
+    this.setState({
+      showDetail: true,
+      rowData: original,
+    });
+  };
+
+  toggleToFalse = () => {
+    this.setState({
+      showDetail: false,
+    });
+  };
+
+  // Toggles showDetail between true and false
+  toggleDetail = (rowData) => {
+    this.state.showDetail ? this.toggleToFalse() : this.toggleToTrue(rowData);
+  };
+
   render() {
     const {
       columns,
@@ -141,22 +166,34 @@ export default class Library extends Component {
       data.length > 0 && data.length < defaultPageSize ? data.length : pageSize;
 
     return (
-      <ReactTable
-        columns={columns}
-        data={data}
-        pages={pages} // Newly added
-        loading={loading} // Newly added
-        onFetchData={this.fetchData} // Newly added
-        manual // Newly added in regards for filtering, paging, and sorting
-        sortable={false} // Newly added
-        defaultPageSize={defaultPageSize} // Modified
-        className="-striped -highlight"
-        minRows={minRows}
-        // onFilteredChange={(filtered,column) => {
-        //   this.handleFilter(filtered,column,this.state)
-        // }
-        // }
-      />
+      <div>
+        {this.state.showDetail ? (
+          <Detail
+            rowData={this.state.rowData}
+            toggleToFalse={this.toggleToFalse}
+          />
+        ) : (
+          <ReactTable
+            columns={columns}
+            data={data}
+            pages={pages} // Newly added
+            loading={loading} // Newly added
+            onFetchData={this.fetchData} // Newly added
+            manual // Newly added in regards for filtering, paging, and sorting
+            sortable={false} // Newly added
+            defaultPageSize={defaultPageSize}
+            className="-striped -highlight"
+            minRows={minRows}
+            getTdProps={(state, rowInfo, column, instance) => {
+              return {
+                onClick: (e, handleOriginal) => {
+                  this.toggleDetail(rowInfo);
+                },
+              };
+            }}
+          />
+        )}
+      </div>
     );
   }
 }
