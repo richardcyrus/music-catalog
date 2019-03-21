@@ -20,7 +20,7 @@ module.exports = {
                 db.Performance.findAll({ where: { name } }).then(([p]) => p)
               )
             );
-            sheetMusic.setPerformances(performed);
+            sheetMusic.setPerformed(performed);
           }
 
           return sheetMusic;
