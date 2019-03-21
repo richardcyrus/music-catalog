@@ -88,12 +88,6 @@ class SiteWrapper extends Component {
                 <NavDropdown.Item onClick={() => this.handleLink('/users/add')}>
                   Add User
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink('/roles')}>
-                  List Roles
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink('/roles/add')}>
-                  Add Role
-                </NavDropdown.Item>
               </NavDropdown>
               <Nav.Item>
                 <Nav.Link onClick={this.props.handleLogout}>Logout</Nav.Link>

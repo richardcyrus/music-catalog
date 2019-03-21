@@ -3,47 +3,52 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from './formInput';
 import Api from '../../utils/api';
+import Card from 'react-bootstrap/Card';
 
 const RenderForm = ({ isSubmitting, dirty }) => {
   return (
     <React.Fragment>
-      <Form>
-        <Field
-          name="userLogin"
-          placeholder="username"
-          label="User name"
-          type="text"
-          component={FormInput}
-        />
-        <Field
-          name="userPass"
-          placeholder="password"
-          label="Password"
-          type="password"
-          component={FormInput}
-        />
-        <Field
-          name="passwordConfirm"
-          placeholder="confirm password"
-          label="Confirm Password"
-          type="password"
-          component={FormInput}
-        />
-        <Field
-          name="userEmail"
-          placeholder="email address"
-          label="Email Address"
-          type="email"
-          component={FormInput}
-        />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={isSubmitting || !dirty}
-        >
-          Save
-        </button>
-      </Form>
+      <Card border="dark">
+        <Card.Body>
+          <Form>
+            <Field
+              name="userLogin"
+              placeholder="username"
+              label="User name"
+              type="text"
+              component={FormInput}
+            />
+            <Field
+              name="userPass"
+              placeholder="password"
+              label="Password"
+              type="password"
+              component={FormInput}
+            />
+            <Field
+              name="passwordConfirm"
+              placeholder="confirm password"
+              label="Confirm Password"
+              type="password"
+              component={FormInput}
+            />
+            <Field
+              name="userEmail"
+              placeholder="email address"
+              label="Email Address"
+              type="email"
+              component={FormInput}
+            />
+            <button
+              className="btn btn-primary"
+              type="submit"
+              disabled={isSubmitting || !dirty}
+            >
+              Save
+            </button>
+          </Form>
+        </Card.Body>
+      </Card>
     </React.Fragment>
   );
 };

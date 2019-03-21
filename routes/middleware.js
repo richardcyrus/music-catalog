@@ -8,25 +8,25 @@ const jwt = require('jsonwebtoken');
 const checkToken = (req, res, next) => {
   let token = req.headers['x-access-token'] || req.headers.authorization;
   if (token && token.startsWith('Bearer ')) {
-    token = token.slice(7, token.length);
+    token = token.replace('Bearer ', '');
   }
 
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err) {
-        return res.json({
+        return res.status(401).json({
           success: false,
-          message: 'Token is not valid',
+          message: 'Please Login to use this application.',
         });
       } else {
-        req.decoded = decoded;
+        req.user = user;
         next();
       }
     });
   } else {
-    return res.json({
+    return res.status(401).json({
       success: false,
-      message: 'Auth token was not supplied',
+      message: 'Please Login to use this application.',
     });
   }
 };

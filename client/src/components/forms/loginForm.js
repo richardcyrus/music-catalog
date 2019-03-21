@@ -58,7 +58,7 @@ const LoginForm = withFormik({
       // eslint-disable-next-line no-unused-vars
       const decode = jwtDecode(token);
 
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
 
       Api.setAuthToken(token);
 

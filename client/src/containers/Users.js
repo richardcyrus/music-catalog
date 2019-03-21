@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import SiteWrapper from './SiteWrapper';
 import UsersTable from '../components/usersTable';
 import AddUser from '../components/forms/addUser';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default class Users extends Component {
   render() {
@@ -10,10 +12,12 @@ export default class Users extends Component {
       <SiteWrapper {...this.props}>
         {match.url === '/users' ? <UsersTable /> : null}
         {match.url === '/users/add' ? (
-          <React.Fragment>
-            <h1>Add User</h1>
-            <AddUser {...this.props} />
-          </React.Fragment>
+          <Row className="justify-content-center">
+            <Col md="6">
+              <h1 className="text-center">Add User</h1>
+              <AddUser {...this.props} />
+            </Col>
+          </Row>
         ) : null}
       </SiteWrapper>
     );

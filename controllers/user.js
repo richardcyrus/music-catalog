@@ -20,14 +20,29 @@ const defaultAttributes = [
 
 module.exports = {
   loginUser: (req, res) => {
-    // debug(req.user.userLogin);
-    const token = jwt.sign(
-      { username: req.user.userLogin },
-      process.env.JWT_SECRET,
-      { expiresIn: '24h' }
-    );
+    const { user } = req;
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Permission denied!',
+      });
+    }
+
+    const u = {
+      name: user.userEmail,
+      userLogin: user.userLogin,
+      email: user.userEmail,
+      active: user.userActive,
+      id: user.userId,
+    };
+
+    const token = jwt.sign(u, process.env.JWT_SECRET, {
+      expiresIn: 60 * 60 * 24,
+    });
+
     res.status(200).json({
-      auth: true,
+      user: u,
       token: token,
     });
   },

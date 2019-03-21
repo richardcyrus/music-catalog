@@ -19,7 +19,7 @@ class App extends Component {
 
   componentDidMount() {
     try {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       if (token) {
         Api.setAuthToken(token);
         this.userHasAuthenticated(true);
@@ -37,7 +37,7 @@ class App extends Component {
 
   // Global handler to logout.
   handleLogout = (event) => {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     Api.setAuthToken(false);
 
     this.userHasAuthenticated(false);
