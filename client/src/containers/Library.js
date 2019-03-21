@@ -43,20 +43,27 @@ export default class Library extends Component {
           width: 64,
           style: { textAlign: 'right' },
         },
+        {
+          accessor: 'performances',
+          Header: 'Date(s) Performed',
+          style: { whiteSpace: 'unset' },
+        },
       ],
-      rows: [],
+      data: [],
       pages: -1,
+      defaultPageSize: 10,
+      loading: false,
     };
+
+    this.fetchData = this.fetchData.bind(this);
   }
 
-  componentDidMount() {
-    this.loadMusicLibrary();
-  }
+  fetchData(state, instance) {
+    this.setState({ loading: true });
 
-  loadMusicLibrary = () => {
-    return Api.listMusic()
-      .then((result) => {
-        const rows = result.data.map((record) => {
+    Api.listLibrary(state.pageSize, state.page)
+      .then((res) => {
+        const rows = res.data.rows.map((record) => {
           return {
             ...record,
             occasions: record.occasions.map((o) => o.name).join(', '),
@@ -67,22 +74,55 @@ export default class Library extends Component {
             languages: record.languages.map((o) => o.language).join(', '),
             lyricists: record.lyricists.map((o) => o.name).join(', '),
             accompaniments: record.accompaniments.map((o) => o.name).join(', '),
+            performances: record.performed
+              .map((o) => {
+                const dt = new Date(o.startDate);
+                return `${dt.toLocaleDateString('en-US', {
+                  month: 'short',
+                  year: '2-digit',
+                })}`;
+              })
+              .join(', '),
           };
         });
-        this.setState({ rows });
+
+        this.setState({
+          data: rows,
+          pages: res.data.pages,
+          loading: false,
+        });
       })
       .catch((err) => console.log(err));
-  };
+  }
 
   render() {
-    const { columns, rows } = this.state;
+    const {
+      columns,
+      data,
+      pages,
+      loading,
+      pageSize,
+      defaultPageSize,
+    } = this.state;
+
+    // minRows will remove empty rows if there aren't enough rows to meet
+    // the defaultPageSize.
+    const minRows =
+      data.length > 0 && data.length < defaultPageSize ? data.length : pageSize;
 
     return (
       <SiteWrapper {...this.props}>
+        <h2 className="mb-4">Music Library</h2>
         <ReactTable
           columns={columns}
-          data={rows}
-          defaultPageSize={10}
+          data={data}
+          pages={pages}
+          loading={loading}
+          minRows={minRows}
+          onFetchData={this.fetchData}
+          manual
+          sortable={false}
+          defaultPageSize={defaultPageSize}
           className="-striped -highlight"
         />
       </SiteWrapper>

@@ -9,19 +9,55 @@ const client = axios.create({
 });
 
 export default {
-  listMusic: function() {
-    return client.get('/library');
+  listLibrary: (pageSize, page) => {
+    return client.get('/library', { params: { pageSize, page } });
   },
-  findPerformances: function(pageSize, page) {
-    return client.get('/performance', { params: { pageSize, page } });
+  addScore: (score) => {
+    return client.post('/library', score);
   },
-  findMembers: function(pageSize, page) {
+  getScore: (id) => {
+    return client.get(`/library/${id}`);
+  },
+  listPerformances: (pageSize, page) => {
+    return client.get('/performances', { params: { pageSize, page } });
+  },
+  addPerformance: (performance) => {
+    return client.post('/performances', performance);
+  },
+  getPerformance: (id) => {
+    return client.get(`/performances/${id}`);
+  },
+  listMembers: (pageSize, page) => {
     return client.get('/members', { params: { pageSize, page } });
   },
-  loginUser: function(user) {
-    return client.post('/user/login', user);
+  addMember: (member) => {
+    return client.post('/members', member);
   },
-  setAuthToken: function(token) {
+  getMember: (id) => {
+    return client.get(`/members/${id}`);
+  },
+  listRoles: (pageSize, page) => {
+    return client.get('/roles', { params: { pageSize, page } });
+  },
+  addRole: (role) => {
+    return client.post('/roles', role);
+  },
+  getRole: (id) => {
+    return client.get(`/roles/${id}`);
+  },
+  listUsers: (pageSize, page) => {
+    return client.get('/users', { params: { pageSize, page } });
+  },
+  addUser: (user) => {
+    return client.post('/users', user);
+  },
+  getUser: (id) => {
+    return client.get(`/users/${id}`);
+  },
+  loginUser: (user) => {
+    return client.post('/users/login', user);
+  },
+  setAuthToken: (token) => {
     if (token) {
       client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     } else {

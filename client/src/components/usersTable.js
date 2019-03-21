@@ -1,40 +1,50 @@
 import React, { Component } from 'react';
-import SiteWrapper from './SiteWrapper';
 import ReactTable from 'react-table';
 import Api from '../utils/api';
 
-export default class Members extends Component {
+export default class usersTable extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       columns: [
         {
-          accessor: 'givenName',
-          Header: 'First Name',
-          style: { whiteSpace: 'unset' },
+          accessor: 'userLogin',
+          Header: 'Login name',
+          style: { whiteSpace: 'unset', textAlign: 'center' },
         },
         {
-          accessor: 'familyName',
-          Header: 'Last Name',
-          style: { whiteSpace: 'unset' },
-        },
-        {
-          accessor: 'emailAddress',
+          accessor: 'userEmail',
           Header: 'e-mail',
+          style: { whiteSpace: 'unset', textAlign: 'center' },
+        },
+        {
+          id: 'userRegistered',
+          accessor: (row) => {
+            const dt = new Date(row.userRegistered);
+            return `${dt.toDateString()}`;
+          },
+          Header: 'Date Registered',
+          width: 150,
           style: { whiteSpace: 'unset' },
         },
         {
-          accessor: 'phoneNumber',
-          Header: 'Phone Number',
+          id: 'userActive',
+          accessor: (row) => (row.userActive === 0 ? 'No' : 'Yes'),
+          Header: 'Enabled?',
+          width: 75,
+          style: { textAlign: 'center' },
         },
         {
-          accessor: 'vocalRange',
-          Header: 'Vocal Range',
+          id: 'userApproved',
+          accessor: (row) => (row.userApproved === 0 ? 'No' : 'Yes'),
+          Header: 'Approved?',
+          width: 130,
+          style: { textAlign: 'center' },
         },
         {
-          accessor: 'pronoun',
-          Header: 'Pronoun',
+          accessor: 'roles',
+          Header: 'Roles',
         },
       ],
       data: [],
@@ -48,15 +58,13 @@ export default class Members extends Component {
   fetchData(state, instance) {
     this.setState({ loading: true });
 
-    Api.listMembers(state.pageSize, state.page)
-      .then((res) => {
-        this.setState({
-          data: res.data.rows,
-          pages: res.data.pages,
-          loading: false,
-        });
-      })
-      .catch((err) => console.log(err));
+    Api.listUsers(state.pageSize, state.page).then((res) => {
+      this.setState({
+        data: res.data.rows,
+        pages: res.data.pages,
+        loading: false,
+      });
+    });
   }
 
   render() {
@@ -75,8 +83,8 @@ export default class Members extends Component {
       data.length > 0 && data.length < defaultPageSize ? data.length : pageSize;
 
     return (
-      <SiteWrapper {...this.props}>
-        <h2 className="mb-4">Member List</h2>
+      <React.Fragment>
+        <h2 className="mb-4">Current Users</h2>
         <ReactTable
           columns={columns}
           data={data}
@@ -89,7 +97,7 @@ export default class Members extends Component {
           defaultPageSize={defaultPageSize}
           className="-striped -highlight"
         />
-      </SiteWrapper>
+      </React.Fragment>
     );
   }
 }

@@ -9,6 +9,8 @@ import Home from './containers/Home';
 import Library from './containers/Library';
 import Performances from './containers/Performances';
 import Members from './containers/Members';
+import Users from './containers/Users';
+import AddUser from './containers/Users';
 
 export default ({ childProps }) => (
   <Switch>
@@ -31,6 +33,12 @@ export default ({ childProps }) => (
       component={Members}
       props={childProps}
     />
+    <AuthenticatedRoute
+      path="/users/add"
+      component={AddUser}
+      props={childProps}
+    />
+    <AuthenticatedRoute path="/users" component={Users} props={childProps} />
     <UnauthenticatedRoute
       path="/login"
       exact

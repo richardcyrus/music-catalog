@@ -6,14 +6,18 @@
 
 const express = require('express');
 const router = express.Router();
+const checkToken = require('../middleware');
+
 const libraryRoutes = require('./library');
 const userRoutes = require('./user');
 const performanceRoutes = require('./performance');
 const memberRoutes = require('./members');
+const roleRoutes = require('./roles');
 
-router.use('/library', libraryRoutes);
-router.use('/user', userRoutes);
-router.use('/performance', performanceRoutes);
-router.use('/members', memberRoutes);
+router.use('/library', checkToken, libraryRoutes);
+router.use('/users', userRoutes);
+router.use('/performances', checkToken, performanceRoutes);
+router.use('/members', checkToken, memberRoutes);
+router.use('/roles', checkToken, roleRoutes);
 
 module.exports = router;

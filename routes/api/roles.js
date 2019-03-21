@@ -5,17 +5,17 @@
  */
 const express = require('express');
 const router = express.Router();
-const memberController = require('../../controllers/members');
+const rolesController = require('../../controllers/roles');
 
 router
   .route('/')
-  .get(memberController.list)
-  .post(memberController.create);
+  .get(rolesController.list)
+  .post(rolesController.create);
 
 router
   .route('/:id')
-  .get(memberController.findOne)
-  .put(memberController.update)
-  .delete(memberController.destroy);
+  .get(rolesController.findOne)
+  .put(rolesController.update)
+  .delete(rolesController.destroy);
 
 module.exports = router;

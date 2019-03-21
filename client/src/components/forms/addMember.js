@@ -103,7 +103,7 @@ const MemberSchema = Yup.object().shape({
     .notRequired(),
 });
 
-const AddEditMemberForm = withFormik({
+const AddMemberForm = withFormik({
   mapPropsToValues: () => ({
     givenName: '',
     familyName: '',
@@ -118,7 +118,7 @@ const AddEditMemberForm = withFormik({
   handleSubmit: (values) => {
     console.log(values);
   },
-  displayName: 'AddEditMemberForm',
+  displayName: 'AddMemberForm',
 })(MemberForm);
 
-export default AddEditMemberForm;
+export default AddMemberForm;

@@ -36,13 +36,15 @@ export default class Performances extends Component {
   fetchData(state, instance) {
     this.setState({ loading: true });
 
-    Api.findPerformances(state.pageSize, state.page).then((res) => {
-      this.setState({
-        data: res.data.rows,
-        pages: res.data.pages,
-        loading: false,
-      });
-    });
+    Api.listPerformances(state.pageSize, state.page)
+      .then((res) => {
+        this.setState({
+          data: res.data.rows,
+          pages: res.data.pages,
+          loading: false,
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -62,6 +64,7 @@ export default class Performances extends Component {
 
     return (
       <SiteWrapper {...this.props}>
+        <h2 className="mb-4">Concerts &amp; Events</h2>
         <ReactTable
           columns={columns}
           data={data}

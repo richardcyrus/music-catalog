@@ -52,7 +52,7 @@ const PerformanceSchema = Yup.object().shape({
     .notRequired(),
 });
 
-const AddEditPerformanceForm = withFormik({
+const AddPerformanceForm = withFormik({
   mapPropsToValues: () => ({
     name: '',
     description: '',
@@ -64,7 +64,7 @@ const AddEditPerformanceForm = withFormik({
     console.log(props);
     console.log(values);
   },
-  displayName: 'AddEditPerformanceForm',
+  displayName: 'AddPerformanceForm',
 })(RenderForm);
 
-export default AddEditPerformanceForm;
+export default AddPerformanceForm;

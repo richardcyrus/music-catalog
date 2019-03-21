@@ -101,7 +101,7 @@ const MusicSchema = Yup.object().shape({
     .notRequired(),
 });
 
-const AddEditMusicForm = withFormik({
+const AddMusicForm = withFormik({
   mapPropsToValues: () => ({
     title: '',
     description: '',
@@ -116,7 +116,7 @@ const AddEditMusicForm = withFormik({
   handleSubmit: (values) => {
     console.log(values);
   },
-  displayName: 'AddEditMusicForm',
+  displayName: 'AddMusicForm',
 })(RenderForm);
 
-export default AddEditMusicForm;
+export default AddMusicForm;

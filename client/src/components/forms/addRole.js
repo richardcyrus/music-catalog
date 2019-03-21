@@ -3,6 +3,7 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from './formInput';
 import FormTextArea from './formTextArea';
+import Api from '../../utils/api';
 
 const RoleForm = () => {
   return (
@@ -39,16 +40,35 @@ const RoleSchema = Yup.object().shape({
     .required('The role description is required.'),
 });
 
-const AddEditRoleForm = withFormik({
+const AddRoleForm = withFormik({
   mapPropsToValues: () => ({
     name: '',
     description: '',
   }),
   validationSchema: RoleSchema,
-  handleSubmit: (values) => {
-    console.log(values);
+  handleSubmit: (values, { setErrors, setSubmitting, props }) => {
+    Api.addRole(values)
+      .then(() => {
+        setSubmitting(false);
+        props.history.push('/roles');
+      })
+      .catch((error) => {
+        console.log(error);
+
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.validationErrors
+        ) {
+          setErrors(error.response.data.validationErrors);
+          setSubmitting(false);
+        } else {
+          setSubmitting(false);
+          throw error;
+        }
+      });
   },
-  displayName: 'AddEditRoleForm',
+  displayName: 'AddRoleForm',
 })(RoleForm);
 
-export default AddEditRoleForm;
+export default AddRoleForm;

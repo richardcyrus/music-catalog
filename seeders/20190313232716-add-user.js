@@ -23,6 +23,8 @@ module.exports = {
           user_pass: hash,
           user_email: 'admin@example.com',
           user_registered: new Date(),
+          user_active: true,
+          user_approved: true,
           created_at: new Date(),
           updated_at: new Date(),
         },

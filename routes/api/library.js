@@ -5,9 +5,17 @@
  */
 const express = require('express');
 const router = express.Router();
-const libraryController = require('../../controllers/musicLibrary');
-const checkToken = require('../middleware');
+const libraryController = require('../../controllers/library');
 
-router.get('/', checkToken, libraryController.findAll);
+router
+  .route('/')
+  .get(libraryController.list)
+  .post(libraryController.create);
+
+router
+  .route('/:id')
+  .get(libraryController.findOne)
+  .put(libraryController.update)
+  .delete(libraryController.destroy);
 
 module.exports = router;

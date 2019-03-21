@@ -3,10 +3,20 @@ import { NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'react-table/react-table.css';
 import logo from '../assets/YourScore-logo-white-02.svg';
 
 class SiteWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLink = this.handleLink.bind(this);
+  }
+
+  handleLink(path) {
+    this.props.history.push(path);
+  }
+
   render() {
     return (
       <Fragment>
@@ -71,6 +81,20 @@ class SiteWrapper extends Component {
               </Nav.Item>
             </Nav>
             <Nav className="ml-auto">
+              <NavDropdown title="Administer">
+                <NavDropdown.Item onClick={() => this.handleLink('/users')}>
+                  List Users
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => this.handleLink('/users/add')}>
+                  Add User
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => this.handleLink('/roles')}>
+                  List Roles
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => this.handleLink('/roles/add')}>
+                  Add Role
+                </NavDropdown.Item>
+              </NavDropdown>
               <Nav.Item>
                 <Nav.Link onClick={this.props.handleLogout}>Logout</Nav.Link>
               </Nav.Item>

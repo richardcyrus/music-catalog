@@ -15,7 +15,17 @@ router.post(
   userController.loginUser
 );
 // router.post('/register', userController.registerUser);
-router.get('/', checkToken, userController.findAll);
-router.get('/:id', checkToken, userController.find);
+
+router
+  .route('/')
+  .get(checkToken, userController.list)
+  .post(checkToken, userController.create);
+
+router
+  .route('/:id')
+  .all(checkToken)
+  .get(userController.findOne)
+  .put(userController.update)
+  .delete(userController.destroy);
 
 module.exports = router;

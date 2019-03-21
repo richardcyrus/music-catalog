@@ -4,10 +4,11 @@
  * (c) 2019 Richard Cyrus, Rojin Pourkhomami, Alexis Rogers, Santiago Sepulveda
  */
 const db = require('../models');
+// eslint-disable-next-line no-unused-vars
 const debug = require('debug')('your-score:userController');
 const jwt = require('jsonwebtoken');
 
-const userAttributes = [
+const defaultAttributes = [
   'userId',
   'userLogin',
   'userEmail',
@@ -30,32 +31,19 @@ module.exports = {
       token: token,
     });
   },
-  findAll: (req, res) => {
-    // Set a default record limit of 10, if the pageSize isn't provided.
+  list: (req, res) => {
     const limit = parseInt(req.query.pageSize) || 10;
     let offset = 0;
 
-    debug('params:limit', limit);
-    debug('params:offset', offset);
-
     db.User.findAndCountAll()
       .then((data) => {
-        // react-table starts at page 0, so set here if not provided.
         const page = parseInt(req.query.page) || 0;
-
-        // Calculate the total number of pages based on the limit.
         const pages = Math.ceil(data.count / limit);
-
-        // Set the offset for the query based on the page number.
         offset = page > 0 ? limit * page : offset;
-
-        debug('findAndCountAll:page', page);
-        debug('findAndCountAll:pages', pages);
-        debug('findAndCountAll:offset', offset);
 
         return db.User.scope('withRoles')
           .findAll({
-            attributes: userAttributes,
+            attributes: defaultAttributes,
             limit: limit,
             offset: offset,
           })
@@ -69,17 +57,50 @@ module.exports = {
       })
       .catch((error) => res.status(422).json(error));
   },
-  find: (req, res) => {
-    return db.User.scope('withRoles')
+  findOne: (req, res) => {
+    db.User.scope('withRoles')
       .findOne({
         where: { userId: req.params.id },
-        attributes: userAttributes,
+        attributes: defaultAttributes,
       })
-      .then((results) => {
-        res.status(200).json({
-          results,
-        });
-      })
+      .then((results) => res.status(200).json(results))
       .catch((error) => res.status(422).json(error));
+  },
+  create: (req, res) => {
+    const { userLogin, userPass, userEmail, userActive } = req.body;
+
+    db.User.findOrCreate({
+      where: { userEmail: userEmail.toLowerCase() },
+      defaults: {
+        userLogin: userLogin,
+        userPass: userPass,
+        userRegistered: new Date(),
+        userActive: userActive,
+      },
+    })
+      .spread((user, created) => {
+        if (user && !created) {
+          return res.status(422).json({
+            validationErrors: {
+              userEmail: 'A user with that email already exists',
+            },
+          });
+        }
+
+        if (user && created) {
+          return res.status(201).json(user.get({ plain: true }));
+        }
+      })
+      .catch((error) => res.status(422).json({ error }));
+  },
+  update: function(req, res) {
+    res
+      .status(422)
+      .json({ message: 'userController::update() not implemented' });
+  },
+  destroy: function(req, res) {
+    res
+      .status(422)
+      .json({ message: 'userController::destroy() not implemented' });
   },
 };
