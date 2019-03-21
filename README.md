@@ -77,10 +77,10 @@ Track the collection of sheet music scores used by choral and other music arts o
 5. Update the `SEED_USER_PASSWORD` value in the `.env` file. This will become the password for the initial user created when seeding the database.
 6. Update the `MYSQLDB_URL` to point to your local copy of the database.
    The format of the MySQL URL is `mysql://user:password@host/database` where:
-   `user`: is the user name to access the database.
-   `password`: is the password to access the database. If providing the password it is `mysql://user:password@...`
-   `host`: the the hostname of IP address of the MySQL database server.
-   `database`: is the name of the database.
+   - `user`: is the user name to access the database.
+   - `password`: is the password to access the database. If providing the password it is `mysql://user:password@...`
+   - `host`: the the hostname of IP address of the MySQL database server.
+   - `database`: is the name of the database.
 7. From the shell, in the project folder, enter `yarn` to install the project dependencies.
 8. At the shell prompt enter `./node_modules/.bin/sequelize db:create`
 9. Once the dependencies have been installed, type `yarn start` to launch the application.
@@ -89,8 +89,7 @@ Track the collection of sheet music scores used by choral and other music arts o
 
 In the development environment, sequelize-cli is configured to store the tracking information in a local JSON file. To see the database after cloning the repository, perform the following steps.
 
-1. Remove the `${PROJECT_ROOT}/seeders/sequelize-data.json` file.
-2. From a shell in the project folder, enter the following commands to put sample information in the database.
+1. From a shell in the project folder, enter the following commands to put sample information in the database.
 
     ```bash
     ./node_modules/.bin/sequelize db:seed --seed 20190308184118-async-add-sheet-music
@@ -101,4 +100,4 @@ In the development environment, sequelize-cli is configured to store the trackin
     ./node_modules/.bin/sequelize db:seed --seed 20190315164823-associate-music-to-performances
     ```
 
-3. Once all of the seed files have been executed, you should be able to login to the application. The default username is `admin`, and the password is what you defined in the `.env` file as the `SEED_USER_PASSWORD`.
+2. Once all of the seed files have been executed, you should be able to login to the application. The default username is `admin`, and the password is what you defined in the `.env` file as the `SEED_USER_PASSWORD`.
