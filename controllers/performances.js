@@ -6,6 +6,7 @@
 const db = require('../models');
 // eslint-disable-next-line no-unused-vars
 const debug = require('debug')('your-score:performanceController');
+const Op = db.Sequelize.Op;
 
 const defaultAttributes = ['id', 'name', 'description', 'startDate'];
 
@@ -13,6 +14,23 @@ module.exports = {
   list: function(req, res) {
     const limit = parseInt(req.query.pageSize) || 10;
     let offset = 0;
+
+    // Start building the database query conditions.
+    const filter = {
+      attributes: defaultAttributes,
+    };
+
+    // If we have the column and value parameters, add them to the
+    // query conditions.
+    const { column, value } = req.query;
+
+    if (column !== undefined) {
+      filter.where = {
+        [column]: {
+          [Op.like]: `%${value}%`,
+        },
+      };
+    }
 
     db.Performance.findAndCountAll()
       .then((data) => {
@@ -22,7 +40,7 @@ module.exports = {
 
         return db.Performance.scope('songs')
           .findAll({
-            attributes: defaultAttributes,
+            ...filter,
             limit: limit,
             offset: offset,
           })
