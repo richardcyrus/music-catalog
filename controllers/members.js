@@ -6,6 +6,7 @@
 const db = require('../models');
 // eslint-disable-next-line no-unused-vars
 const debug = require('debug')('your-score:memberController');
+const Op = db.Sequelize.Op;
 
 const defaultAttributes = [
   'memberId',
@@ -24,6 +25,23 @@ module.exports = {
     const limit = parseInt(req.query.pageSize) || 10;
     let offset = 0;
 
+    // Start building the database query conditions.
+    const filter = {
+      attributes: defaultAttributes,
+    };
+
+    // If we have the column and value parameters, add them to the
+    // query conditions.
+    const { column, value } = req.query;
+
+    if (column !== undefined) {
+      filter.where = {
+        [column]: {
+          [Op.like]: `%${value}%`,
+        },
+      };
+    }
+
     db.Member.findAndCountAll()
       .then((data) => {
         const page = parseInt(req.query.page) || 0;
@@ -31,7 +49,8 @@ module.exports = {
         offset = page > 0 ? limit * page : offset;
 
         return db.Member.findAll({
-          attributes: defaultAttributes,
+          // attributes: defaultAttributes,
+          ...filter,
           limit: limit,
           offset: offset,
         }).then((results) => {

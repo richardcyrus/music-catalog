@@ -13,11 +13,13 @@ export default class Members extends Component {
           accessor: 'givenName',
           Header: 'First Name',
           style: { whiteSpace: 'unset' },
+          filterable: true,
         },
         {
           accessor: 'familyName',
           Header: 'Last Name',
           style: { whiteSpace: 'unset' },
+          filterable: true,
         },
         {
           accessor: 'emailAddress',
@@ -31,10 +33,12 @@ export default class Members extends Component {
         {
           accessor: 'vocalRange',
           Header: 'Vocal Range',
+          filterable: true,
         },
         {
           accessor: 'pronoun',
           Header: 'Pronoun',
+          filterable: true,
         },
       ],
       data: [],
@@ -48,7 +52,34 @@ export default class Members extends Component {
   fetchData(state, instance) {
     this.setState({ loading: true });
 
-    Api.listMembers(state.pageSize, state.page)
+    let queryParams;
+    const { pageSize, page, filtered } = state;
+
+    // If the user types in a filter box, process here and add to the query.
+    const filterParams = { column: '', value: '' };
+    if (filtered.length > 0) {
+      filtered.forEach((col) => {
+        filterParams.column = col.id;
+        filterParams.value = col.value;
+      });
+    }
+
+    // Only add the filter if the value has more than 2 characters
+    // Poor man's debounce (for now).
+    if (filterParams.column.length > 0 && filterParams.value.length > 2) {
+      queryParams = {
+        pageSize,
+        page,
+        ...filterParams,
+      };
+    } else {
+      queryParams = {
+        pageSize,
+        page,
+      };
+    }
+
+    Api.listMembers(queryParams)
       .then((res) => {
         this.setState({
           data: res.data.rows,

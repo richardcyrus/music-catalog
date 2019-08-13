@@ -18,8 +18,8 @@ export default {
   getScore: (id) => {
     return client.get(`/library/${id}`);
   },
-  listPerformances: (pageSize, page) => {
-    return client.get('/performances', { params: { pageSize, page } });
+  listPerformances: (query) => {
+    return client.get('/performances', { params: query });
   },
   addPerformance: (performance) => {
     return client.post('/performances', performance);
@@ -27,8 +27,8 @@ export default {
   getPerformance: (id) => {
     return client.get(`/performances/${id}`);
   },
-  listMembers: (pageSize, page) => {
-    return client.get('/members', { params: { pageSize, page } });
+  listMembers: (query) => {
+    return client.get('/members', { params: query });
   },
   addMember: (member) => {
     return client.post('/members', member);
