@@ -35,10 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Location.associate = function(models) {
     // associations can be defined here
-    Location.hasMany(models.SheetMusic, {
-      foreignKey: 'location_id',
-      sourceKey: 'location_id',
-    });
+    Location.hasMany(models.SheetMusic);
   };
 
   return Location;
