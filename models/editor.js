@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Editor.associate = function(models) {
+  Editor.associate = function (models) {
     Editor.belongsToMany(models.SheetMusic, {
       through: 'sheet_music_editors',
       foreignKey: 'editor_id',

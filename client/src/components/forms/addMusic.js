@@ -75,30 +75,17 @@ const RenderForm = () => {
 
 const MusicSchema = Yup.object().shape({
   title: Yup.string().required('Required'),
-  description: Yup.string()
-    .nullable(true)
-    .notRequired(),
-  voices: Yup.string()
-    .nullable(true)
-    .notRequired(),
-  duration: Yup.string()
-    .nullable(true)
-    .notRequired(),
-  style: Yup.string()
-    .nullable(true)
-    .notRequired(),
-  publisher: Yup.string()
-    .nullable(true)
-    .notRequired(),
+  description: Yup.string().nullable(true).notRequired(),
+  voices: Yup.string().nullable(true).notRequired(),
+  duration: Yup.string().nullable(true).notRequired(),
+  style: Yup.string().nullable(true).notRequired(),
+  publisher: Yup.string().nullable(true).notRequired(),
   quantityOnHand: Yup.number()
     .positive()
     .integer()
     .nullable(true)
     .notRequired(),
-  purchasePrice: Yup.number()
-    .positive()
-    .nullable(true)
-    .notRequired(),
+  purchasePrice: Yup.number().positive().nullable(true).notRequired(),
 });
 
 const AddMusicForm = withFormik({

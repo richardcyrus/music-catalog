@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Lyricist.associate = function(models) {
+  Lyricist.associate = function (models) {
     Lyricist.belongsToMany(models.SheetMusic, {
       through: 'sheet_music_lyricists',
       foreignKey: 'lyricist_id',

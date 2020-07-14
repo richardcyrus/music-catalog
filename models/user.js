@@ -70,11 +70,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.prototype.validPassword = function(password) {
+  User.prototype.validPassword = function (password) {
     return bcrypt.compare(password, this.userPass);
   };
 
-  User.prototype.getToken = function() {
+  User.prototype.getToken = function () {
     const signedToken = jwt.sign(
       {
         name: this.userEmail,
@@ -103,7 +103,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
     User.belongsToMany(models.Role, {
       through: 'user_roles',
@@ -112,7 +112,7 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  User.loadScopes = function(models) {
+  User.loadScopes = function (models) {
     User.addScope('withRoles', {
       include: [
         {

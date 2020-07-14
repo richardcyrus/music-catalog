@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Performance.associate = function(models) {
+  Performance.associate = function (models) {
     // associations can be defined here
     Performance.belongsToMany(models.SheetMusic, {
       through: 'music_performed',
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   // From: https://stackoverflow.com/questions/34407193/using-sequelize-with-associations-and-scopes-with-includes-in-multiple-files/40786907#40786907
-  Performance.loadScopes = function(models) {
+  Performance.loadScopes = function (models) {
     Performance.addScope('songs', {
       include: [
         {

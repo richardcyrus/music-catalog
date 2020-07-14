@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  AssignedMusic.associate = function(models) {
+  AssignedMusic.associate = function (models) {
     AssignedMusic.belongsToMany(models.Member, {
       through: 'member_music_assignments',
       foreignKey: 'assignment_id',

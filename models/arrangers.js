@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Arranger.associate = function(models) {
+  Arranger.associate = function (models) {
     // associations can be defined here
     Arranger.belongsToMany(models.SheetMusic, {
       through: 'sheet_music_arrangers',

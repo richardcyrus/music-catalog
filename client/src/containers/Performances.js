@@ -9,7 +9,12 @@ export default class Performances extends Component {
 
     this.state = {
       columns: [
-        { accessor: 'name', Header: 'Name', style: { whiteSpace: 'unset' }, filterable: true, },
+        {
+          accessor: 'name',
+          Header: 'Name',
+          style: { whiteSpace: 'unset' },
+          filterable: true,
+        },
         {
           accessor: 'description',
           Header: 'Description',

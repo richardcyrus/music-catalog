@@ -72,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Member.associate = function(models) {
+  Member.associate = function (models) {
     // associations can be defined here.
     Member.belongsToMany(models.AssignedMusic, {
       through: 'member_music_assignments',

@@ -43,13 +43,9 @@ const RenderForm = () => {
 
 const PerformanceSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
-  description: Yup.string()
-    .nullable(true)
-    .notRequired(),
+  description: Yup.string().nullable(true).notRequired(),
   startDate: Yup.date().required('Required'),
-  endDate: Yup.date()
-    .nullable(true)
-    .notRequired(),
+  endDate: Yup.date().nullable(true).notRequired(),
 });
 
 const AddPerformanceForm = withFormik({

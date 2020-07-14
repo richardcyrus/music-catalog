@@ -4,7 +4,7 @@
  * (c) 2019 Richard Cyrus, Rojin Pourkhomami, Alexis Rogers, Santiago Sepulveda
  */
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const Occasion = sequelize.define(
     'Occasion',
     {
@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
 
-  Occasion.associate = function(models) {
+  Occasion.associate = function (models) {
     // associations can be defined here
     Occasion.belongsToMany(models.SheetMusic, {
       through: 'sheet_music_occasions',

@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Genre.associate = function(models) {
+  Genre.associate = function (models) {
     Genre.belongsToMany(models.SheetMusic, {
       through: 'sheet_music_genres',
       foreignKey: 'genre_id',

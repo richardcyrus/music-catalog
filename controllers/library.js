@@ -22,7 +22,7 @@ const defaultAttributes = [
 ];
 
 module.exports = {
-  list: function(req, res) {
+  list: function (req, res) {
     // Set a default record limit of 10, if the pageSize isn't provided.
     const limit = parseInt(req.query.pageSize) || 10;
     let offset = 0;
@@ -139,7 +139,7 @@ module.exports = {
       })
       .catch((error) => res.status(422).json(error));
   },
-  findOne: function(req, res) {
+  findOne: function (req, res) {
     db.SheetMusic.scope('library')
       .findOne({
         where: { id: req.params.id },
@@ -148,17 +148,17 @@ module.exports = {
       .then((data) => res.status(200).json(data))
       .catch((error) => res.status(422).json(error));
   },
-  create: function(req, res) {
+  create: function (req, res) {
     res
       .status(422)
       .json({ message: 'libraryController::create() not implemented' });
   },
-  update: function(req, res) {
+  update: function (req, res) {
     res
       .status(422)
       .json({ message: 'libraryController::update() not implemented' });
   },
-  destroy: function(req, res) {
+  destroy: function (req, res) {
     res
       .status(422)
       .json({ message: 'libraryController::destroy() not implemented' });

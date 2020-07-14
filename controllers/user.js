@@ -108,12 +108,12 @@ module.exports = {
       })
       .catch((error) => res.status(422).json({ error }));
   },
-  update: function(req, res) {
+  update: function (req, res) {
     res
       .status(422)
       .json({ message: 'userController::update() not implemented' });
   },
-  destroy: function(req, res) {
+  destroy: function (req, res) {
     res
       .status(422)
       .json({ message: 'userController::destroy() not implemented' });

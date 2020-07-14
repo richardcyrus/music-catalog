@@ -156,7 +156,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  SheetMusic.associate = function(models) {
+  SheetMusic.associate = function (models) {
     // associations can be defined here
     SheetMusic.belongsToMany(models.Accompaniment, {
       through: 'sheet_music_accompaniments',

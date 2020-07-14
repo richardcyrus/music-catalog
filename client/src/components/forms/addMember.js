@@ -85,22 +85,14 @@ const MemberForm = () => {
 const MemberSchema = Yup.object().shape({
   givenName: Yup.string().required('Required'),
   familyName: Yup.string().required('Required'),
-  emailAddress: Yup.string()
-    .email()
-    .required('Required'),
+  emailAddress: Yup.string().email().required('Required'),
   phoneNumber: Yup.string().required('Required'),
-  mailingAddress: Yup.string()
-    .nullable(true)
-    .notRequired(),
+  mailingAddress: Yup.string().nullable(true).notRequired(),
   vocalRange: Yup.string()
     .oneOf(vocalRange, `Please choose one of ${values}`)
     .required('Required'),
-  gender: Yup.string()
-    .nullable(true)
-    .notRequired(),
-  pronoun: Yup.string()
-    .nullable(true)
-    .notRequired(),
+  gender: Yup.string().nullable(true).notRequired(),
+  pronoun: Yup.string().nullable(true).notRequired(),
 });
 
 const AddMemberForm = withFormik({

@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Language.associate = function(models) {
+  Language.associate = function (models) {
     // associations can be defined here
     Language.belongsToMany(models.SheetMusic, {
       through: 'sheet_music_languages',

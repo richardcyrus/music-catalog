@@ -7,10 +7,7 @@ const express = require('express');
 const router = express.Router();
 const memberController = require('../../controllers/members');
 
-router
-  .route('/')
-  .get(memberController.list)
-  .post(memberController.create);
+router.route('/').get(memberController.list).post(memberController.create);
 
 router
   .route('/:id')
