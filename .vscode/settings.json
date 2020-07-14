@@ -17,7 +17,11 @@
   "editor.formatOnSave": true,
   "editor.lineNumbers": "on",
   "editor.renderIndentGuides": true,
-  "editor.rulers": [72, 79, 100],
+  "editor.rulers": [
+    72,
+    79,
+    100
+  ],
   "editor.tabCompletion": "on",
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
@@ -32,11 +36,13 @@
     }
   },
   "eslint.alwaysShowStatus": true,
-  "eslint.autoFixOnSave": true,
   "eslint.nodePath": "./node_modules/.bin",
-  "eslint.provideLintTask": true,
   "eslint.run": "onSave",
-  "eslint.validate": ["javascript", "javascriptreact", "html"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html"
+  ],
   "files.associations": {
     ".sequelizerc": "javascript"
   },
@@ -65,5 +71,8 @@
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "es5",
   "scm.diffDecorations": "gutter",
-  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
