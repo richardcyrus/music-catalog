@@ -5,6 +5,7 @@
  */
 const bcrypt = require('bcrypt');
 const BCRYPT_SALT_WORK_FACTOR = parseInt(process.env.SALT_WORK_FACTOR);
+const jwt = require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -71,6 +72,22 @@ module.exports = (sequelize, DataTypes) => {
 
   User.prototype.validPassword = function(password) {
     return bcrypt.compare(password, this.userPass);
+  };
+
+  User.prototype.getToken = function() {
+    const signedToken = jwt.sign(
+      {
+        name: this.userEmail,
+        userLogin: this.userLogin,
+        email: this.userEmail,
+        active: this.userActive,
+        id: this.userId,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: parseInt(process.env.JWT_EXPIRATION) }
+    );
+
+    return `Bearer ${signedToken}`;
   };
 
   User.beforeSave((user, options) => {

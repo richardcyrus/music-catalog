@@ -38,7 +38,7 @@ module.exports = {
     };
 
     const token = jwt.sign(u, process.env.JWT_SECRET, {
-      expiresIn: 60 * 60 * 24,
+      expiresIn: parseInt(process.env.JWT_EXPIRATION),
     });
 
     res.status(200).json({
