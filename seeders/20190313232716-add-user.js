@@ -4,7 +4,7 @@ const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_WORK_FACTOR));
 const hash = bcrypt.hashSync(process.env.SEED_USER_PASSWORD, salt);
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -15,7 +15,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert(
+    await queryInterface.bulkInsert(
       'users',
       [
         {

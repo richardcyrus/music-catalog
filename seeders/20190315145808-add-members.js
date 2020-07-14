@@ -1,16 +1,16 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
 
       Example:
-      return queryInterface.bulkInsert('People', [{
+      await queryInterface.bulkInsert('People', [{
         name: 'John Doe',
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert(
+    await queryInterface.bulkInsert(
       'members',
       [
         {
@@ -64,14 +64,14 @@ module.exports = {
     );
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: async (queryInterface, Sequelize) => {
     /*
       Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
+      await a promise to correctly handle asynchronicity.
 
       Example:
-      return queryInterface.bulkDelete('People', null, {});
+      await queryInterface.bulkDelete('People', null, {});
     */
-    return queryInterface.bulkDelete('members', null, {});
+    await queryInterface.bulkDelete('members', null, {});
   },
 };
