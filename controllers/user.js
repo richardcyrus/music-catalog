@@ -81,32 +81,34 @@ module.exports = {
       .then((results) => res.status(200).json(results))
       .catch((error) => res.status(422).json(error));
   },
-  create: (req, res) => {
+  create: async (req, res) => {
     const { userLogin, userPass, userEmail, userActive } = req.body;
 
-    db.User.findOrCreate({
-      where: { userEmail: userEmail.toLowerCase() },
-      defaults: {
-        userLogin: userLogin,
-        userPass: userPass,
-        userRegistered: new Date(),
-        userActive: userActive,
-      },
-    })
-      .spread((user, created) => {
-        if (user && !created) {
-          return res.status(422).json({
-            validationErrors: {
-              userEmail: 'A user with that email already exists',
-            },
-          });
-        }
+    try {
+      const [user, created] = await db.User.findOrCreate({
+        where: { userEmail: userEmail.toLowerCase() },
+        defaults: {
+          userLogin: userLogin,
+          userPass: userPass,
+          userRegistered: new Date(),
+          userActive: userActive,
+        },
+      });
 
-        if (user && created) {
-          return res.status(201).json(user.get({ plain: true }));
-        }
-      })
-      .catch((error) => res.status(422).json({ error }));
+      if (user && !created) {
+        return res.status(422).json({
+          validationErrors: {
+            userEmail: 'A user with that email already exists',
+          },
+        });
+      }
+
+      if (user && created) {
+        return res.status(201).json(user.get({ plain: true }));
+      }
+    } catch (error) {
+      return res.status(422).json({ error });
+    }
   },
   update: function (req, res) {
     res

@@ -42,26 +42,27 @@ passport.use(
       session: false,
       passReqToCallback: true,
     },
-    (req, email, password, done) => {
-      db.User.findOrCreate({
-        where: { userEmail: req.body.email.toLowerCase() },
-        defaults: {
-          userEmail: req.body.email.toLowerCase(),
-          userLogin: req.body.username,
-          userPass: password,
-          userRegistered: new Date(),
-        },
-      })
-        .spread((user, created) => {
-          if (user && !created) {
-            return done(null, false, { message: EMAIL_EXISTS });
-          }
+    async (req, email, password, done) => {
+      try {
+        const [user, created] = await db.User.findOrCreate({
+          where: { userEmail: req.body.email.toLowerCase() },
+          defaults: {
+            userEmail: req.body.email.toLowerCase(),
+            userLogin: req.body.username,
+            userPass: password,
+            userRegistered: new Date(),
+          },
+        });
+        if (user && !created) {
+          return done(null, false, { message: EMAIL_EXISTS });
+        }
 
-          if (user && created) {
-            return done(null, user);
-          }
-        })
-        .catch((error) => done(error, false));
+        if (user && created) {
+          return done(null, user);
+        }
+      } catch (error) {
+        done(error, false);
+      }
     }
   )
 );
