@@ -9,7 +9,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(path.join(__dirname, '/../config/config.js'))[env];
+const config = require(path.join(__dirname, '..', 'config', 'config.js'))[env];
 const db = {};
 
 let sequelize;
@@ -31,7 +31,10 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach((file) => {
-    const model = sequelize.import(path.join(__dirname, file));
+    const model = require(path.join(__dirname, file))(
+      sequelize,
+      Sequelize.DataTypes
+    );
     db[model.name] = model;
   });
 
