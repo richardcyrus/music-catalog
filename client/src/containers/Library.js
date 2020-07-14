@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SiteWrapper from './SiteWrapper';
 import Api from '../utils/api';
-import ReactTable from 'react-table';
+import ReactTable from 'react-table-v6';
 import Detail from '../components/scoreDetail';
 
 export default class Library extends Component {

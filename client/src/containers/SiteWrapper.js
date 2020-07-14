@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import 'react-table/react-table.css';
+import 'react-table-v6/react-table.css';
 import logo from '../assets/YourScore-logo-white-02.svg';
 
 class SiteWrapper extends Component {

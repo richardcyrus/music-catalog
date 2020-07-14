@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SiteWrapper from './SiteWrapper';
-import ReactTable from 'react-table';
+import ReactTable from 'react-table-v6';
 import Api from '../utils/api';
 
 export default class Members extends Component {
