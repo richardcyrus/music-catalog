@@ -31,6 +31,14 @@ Track the collection of sheet music scores used by choral and other music arts o
 - The application must implement authentication.
 - The application should allow for different role types and limit the data or functions accessible based on those roles.
 
+## Screenshots
+
+![Login](./screenshots/desktop-login.png)
+![Home](./screenshots/desktop-home.png)
+![Library](./screenshots/desktop-library.png)
+![Performances](./screenshots/desktop-performances.png)
+![Add User](./screenshots/desktop-add-user.png)
+
 ## The Team
 
 ### Richard Cyrus
