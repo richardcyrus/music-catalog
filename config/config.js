@@ -7,7 +7,7 @@ const path = require('path');
 
 module.exports = {
   development: {
-    use_env_variable: 'MYSQLDB_URL',
+    use_env_variable: 'MYSQL_URL',
     dialect: 'mysql',
     migrationStorage: 'json',
     migrationStoragePath: path.join(
@@ -32,7 +32,7 @@ module.exports = {
     dialect: 'mysql',
   },
   production: {
-    use_env_variable: 'JAWSDB_URL',
+    use_env_variable: 'MYSQL_URL',
     dialect: 'mysql',
   },
 };

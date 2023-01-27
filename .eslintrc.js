@@ -5,22 +5,22 @@
  */
 
 module.exports = {
-  'extends': 'prettier',
-  'plugins': ['prettier'],
-  'rules': {
-    'prettier/prettier': 'error'
+  extends: 'plugin:prettier/recommended',
+  plugins: ['prettier'],
+  rules: {
+    'prettier/prettier': 'error',
   },
-  'parserOptions': {
-    'ecmaVersion': 2018,
-    'sourceType': 'module',
-    'ecmaFeatures': {
-      'impliedStrict': true
-    }
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: {
+      impliedStrict: true,
+    },
   },
-  'env': {
-    'browser': true,
-    'commonjs': true,
-    'node': true,
-    'es6': true,
-  }
+  env: {
+    browser: true,
+    commonjs: true,
+    node: true,
+    es6: true,
+  },
 };
