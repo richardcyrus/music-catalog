@@ -1,5 +1,14 @@
+.cache
 .eslintrc.js
-.idea
+.next
+.nova
+.output
 .vscode
-client
+api/_build
 build
+client
+dist
+node_modules/
+package-lock.json
+public/build
+yarn.lock
